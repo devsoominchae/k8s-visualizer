@@ -1,0 +1,911 @@
+{
+    "sas-analytics-events": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-analytics-events",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-analytics-events:1.70.5-20250910.1757545934872",
+        "SELECTOR": "app.kubernetes.io/name=sas-analytics-events,sas.com/deployment=sas-viya"
+    },
+    "sas-analytics-execution": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-analytics-execution",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-analytics-execution:1.45.4-20250910.1757545880643",
+        "SELECTOR": "app.kubernetes.io/name=sas-analytics-execution,sas.com/deployment=sas-viya"
+    },
+    "sas-analytics-gateway": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-analytics-gateway",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-analytics-gateway:33.4.10-20251020.1760984424803",
+        "SELECTOR": "app.kubernetes.io/name=sas-analytics-gateway,sas.com/deployment=sas-viya"
+    },
+    "sas-analytics-resources": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-analytics-resources",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-analytics-resources:22.70.3-20250910.1757545928326",
+        "SELECTOR": "app.kubernetes.io/name=sas-analytics-resources,sas.com/deployment=sas-viya"
+    },
+    "sas-annotations": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-annotations",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-annotations:2.83.1-20250903.1756910091006",
+        "SELECTOR": "app.kubernetes.io/name=sas-annotations,sas.com/deployment=sas-viya"
+    },
+    "sas-app-registry": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-app-registry",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-app-registry:1.126.3-20250910.1757541572991",
+        "SELECTOR": "app.kubernetes.io/name=sas-app-registry,sas.com/deployment=sas-viya"
+    },
+    "sas-arke": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-arke",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-arke:1.43.1-20250909.1757426959022",
+        "SELECTOR": "app.kubernetes.io/name=sas-arke,sas.com/deployment=sas-viya"
+    },
+    "sas-audit": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-audit",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-audit:1.137.1-20250905.1757054628296",
+        "SELECTOR": "app.kubernetes.io/name=sas-audit,sas.com/deployment=sas-viya"
+    },
+    "sas-authorization": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-authorization",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-authorization:4.33.11-20251105.1762368535111",
+        "SELECTOR": "app.kubernetes.io/name=sas-authorization,sas.com/deployment=sas-viya"
+    },
+    "sas-batch": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-batch",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-batch:1.33.3-20250916.1758025205282",
+        "SELECTOR": "app.kubernetes.io/name=sas-batch,sas.com/deployment=sas-viya"
+    },
+    "sas-cas-control": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-cas-control",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-cas-control:2.44.11-20251124.1763993920248",
+        "SELECTOR": "app.kubernetes.io/name=sas-cas-control,sas.com/deployment=sas-viya"
+    },
+    "sas-cas-operator": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-cas-operator",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-cas-operator:3.59.10-20250902.1756846578310",
+        "SELECTOR": "name=sas-cas-operator,sas.com/deployment=sas-viya"
+    },
+    "sas-catalog-services": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-catalog-services",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-catalog-services:4.94.3-20251125.1764105697811",
+        "SELECTOR": "app.kubernetes.io/name=sas-catalog-services,sas.com/deployment=sas-viya"
+    },
+    "sas-code-debugger": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-code-debugger",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-code-debugger:2.27.4-20250903.1756910757473",
+        "SELECTOR": "app.kubernetes.io/name=sas-code-debugger,sas.com/deployment=sas-viya"
+    },
+    "sas-code-debugger-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-code-debugger-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-code-debugger-app:2.51.0-20250904.1756953953796",
+        "SELECTOR": "app.kubernetes.io/name=sas-code-debugger-app,sas.com/deployment=sas-viya"
+    },
+    "sas-collaboration": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-collaboration",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-collaboration:2.534.8-20251015.1760538827259",
+        "SELECTOR": "app.kubernetes.io/name=sas-collaboration,sas.com/deployment=sas-viya"
+    },
+    "sas-compute": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-compute",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-compute:1.89.15-20251028.1761678500617",
+        "SELECTOR": "app.kubernetes.io/name=sas-compute,sas.com/deployment=sas-viya"
+    },
+    "sas-configuration": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-configuration",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-configuration:2.30.0-20250912.1757693022211",
+        "SELECTOR": "app.kubernetes.io/name=sas-configuration,sas.com/deployment=sas-viya"
+    },
+    "sas-connect": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-connect",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-connect:4.48.5-20250908.1757353423609",
+        "SELECTOR": "app.kubernetes.io/name=sas-connect,sas.com/deployment=sas-viya"
+    },
+    "sas-connect-spawner": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-connect-spawner",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-connect-spawner:1.13.24-20251111.1762897645221",
+        "SELECTOR": "app.kubernetes.io/name=sas-connect-spawner,sas.com/deployment=sas-viya"
+    },
+    "sas-content": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-content",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-content:1.133.12-20250910.1757541611291",
+        "SELECTOR": "app.kubernetes.io/name=sas-content,sas.com/deployment=sas-viya"
+    },
+    "sas-credentials": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-credentials",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-credentials:2.33.2-20251028.1761688941601",
+        "SELECTOR": "app.kubernetes.io/name=sas-credentials,sas.com/deployment=sas-viya"
+    },
+    "sas-crunchy5-postgres-operator": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "operator",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-crunchy5-postgres-operator:1.6.3-20250609.1749489660207",
+        "SELECTOR": "postgres-operator.crunchydata.com/control-plane=postgres-operator,sas.com/deployment=sas-viya"
+    },
+    "sas-data-agent-services": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-agent-services",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-agent-services:3.17.3-20250911.1757594210255",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-agent-services,sas.com/deployment=sas-viya"
+    },
+    "sas-data-explorer-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-explorer-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-explorer-app:3.3.4-20250925.1758784419315",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-explorer-app,sas.com/deployment=sas-viya"
+    },
+    "sas-data-flows": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-flows",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-flows:1.78.2-20250911.1757600137667",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-flows,sas.com/deployment=sas-viya"
+    },
+    "sas-data-mining-models": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-mining-models",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-data-mining-models:39.103.3-20250417.1744899828804",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-mining-models,sas.com/deployment=sas-viya"
+    },
+    "sas-data-mining-project-resources": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-mining-project-resources",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-mining-project-resources:41.58.14-20251107.1762548317388",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-mining-project-resources,sas.com/deployment=sas-viya"
+    },
+    "sas-data-mining-results": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-mining-results",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-mining-results:40.144.16-20251022.1761122021295",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-mining-results,sas.com/deployment=sas-viya"
+    },
+    "sas-data-mining-risk-models": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-mining-risk-models",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-mining-risk-models:0.88.5-20250912.1757643572468",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-mining-risk-models,sas.com/deployment=sas-viya"
+    },
+    "sas-data-plans": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-plans",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-data-plans:1.56.2-20250627.1751033112082",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-plans,sas.com/deployment=sas-viya"
+    },
+    "sas-data-quality-services": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-quality-services",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-quality-services:3.63.0-20250905.1757092063359",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-quality-services,sas.com/deployment=sas-viya"
+    },
+    "sas-data-server-operator": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-server-operator",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-server-operator:22.22.0-20250909.1757443330664",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-server-operator,sas.com/deployment=sas-viya"
+    },
+    "sas-data-sources": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-sources",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-data-sources:3.91.15-20250910.1757536699643",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-sources,sas.com/deployment=sas-viya"
+    },
+    "sas-data-studio-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-data-studio-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-data-studio-app:2.25.0-20250304.1741102758749",
+        "SELECTOR": "app.kubernetes.io/name=sas-data-studio-app,sas.com/deployment=sas-viya"
+    },
+    "sas-decisions-framework": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "194d",
+        "CONTAINERS": "sas-decisions-framework",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-decisions-framework:11.2.13-20250630.1751295796755",
+        "SELECTOR": "app.kubernetes.io/name=sas-decisions-framework,sas.com/deployment=sas-viya"
+    },
+    "sas-decisions-runtime-builder": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-decisions-runtime-builder",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-decisions-runtime-builder:1.34.3-20251003.1759520568766",
+        "SELECTOR": "app.kubernetes.io/name=sas-decisions-runtime-builder,sas.com/deployment=sas-viya"
+    },
+    "sas-deployment-data": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-deployment-data",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-deployment-data:2.34.0-20250903.1756932466946",
+        "SELECTOR": "app.kubernetes.io/name=sas-deployment-data,sas.com/deployment=sas-viya"
+    },
+    "sas-device-management": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-device-management",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-device-management:2.175.3-20250910.1757539063146",
+        "SELECTOR": "app.kubernetes.io/name=sas-device-management,sas.com/deployment=sas-viya"
+    },
+    "sas-discovery-services": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-discovery-services",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-discovery-services:3.13.4-20250305.1741191331380",
+        "SELECTOR": "app.kubernetes.io/name=sas-discovery-services,sas.com/deployment=sas-viya"
+    },
+    "sas-drive-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-drive-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-drive-app:3.103.15-20250910.1757541639656",
+        "SELECTOR": "app.kubernetes.io/name=sas-drive-app,sas.com/deployment=sas-viya"
+    },
+    "sas-environment-manager-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-environment-manager-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-environment-manager-app:5.73.34-20251104.1762273634519",
+        "SELECTOR": "app.kubernetes.io/name=sas-environment-manager-app,sas.com/deployment=sas-viya"
+    },
+    "sas-feature-flags": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-feature-flags",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-feature-flags:1.64.2-20250310.1741642207635",
+        "SELECTOR": "app.kubernetes.io/name=sas-feature-flags,sas.com/deployment=sas-viya"
+    },
+    "sas-file-store": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "325d",
+        "CONTAINERS": "sas-file-store",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-file-store:3.109.8-20251010.1760088960820",
+        "SELECTOR": "app.kubernetes.io/name=sas-file-store,sas.com/deployment=sas-viya"
+    },
+    "sas-files": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-files",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-files:3.51.4-20251105.1762321410119",
+        "SELECTOR": "app.kubernetes.io/name=sas-files,sas.com/deployment=sas-viya"
+    },
+    "sas-formats": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-formats,sas-portable-formats",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-formats:0.121.7-20250915.1757904712828,01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-portable-formats:16.20.5-20250915.1757986250035",
+        "SELECTOR": "app.kubernetes.io/name=sas-formats,sas.com/deployment=sas-viya"
+    },
+    "sas-gen-ai-gateway": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "3d16h",
+        "CONTAINERS": "sas-gen-ai-gateway",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-gen-ai-gateway:1.33.3-20250915.1757940613842",
+        "SELECTOR": "app.kubernetes.io/name=sas-gen-ai-gateway,sas.com/deployment=sas-viya"
+    },
+    "sas-geography": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-geography",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-geography:2.58.5-20250910.1757533845751",
+        "SELECTOR": "app.kubernetes.io/name=sas-geography,sas.com/deployment=sas-viya"
+    },
+    "sas-graph-builder-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-graph-builder-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-graph-builder-app:1.216.7-20250911.1757602545480",
+        "SELECTOR": "app.kubernetes.io/name=sas-graph-builder-app,sas.com/deployment=sas-viya"
+    },
+    "sas-graph-templates": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-graph-templates",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-graph-templates:1.261.4-20250911.1757601245143",
+        "SELECTOR": "app.kubernetes.io/name=sas-graph-templates,sas.com/deployment=sas-viya"
+    },
+    "sas-identities": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-identities",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-identities:3.31.9-20250930.1759262677117",
+        "SELECTOR": "app.kubernetes.io/name=sas-identities,sas.com/deployment=sas-viya"
+    },
+    "sas-import-9": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-import-9",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-import-9:1.70.13-20250926.1758924703270",
+        "SELECTOR": "app.kubernetes.io/name=sas-import-9,sas.com/deployment=sas-viya"
+    },
+    "sas-information-catalog-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-information-catalog-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-information-catalog-app:1.89.2-20251022.1761162151105",
+        "SELECTOR": "app.kubernetes.io/name=sas-information-catalog-app,sas.com/deployment=sas-viya"
+    },
+    "sas-insights": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-insights,sas-portable-formats",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-insights:1.60.12-20250911.1757599413224,01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-portable-formats:16.20.5-20250915.1757986250035",
+        "SELECTOR": "app.kubernetes.io/name=sas-insights,sas.com/deployment=sas-viya"
+    },
+    "sas-job-execution": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-job-execution",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-job-execution:3.20.13-20251029.1761770086560",
+        "SELECTOR": "app.kubernetes.io/name=sas-job-execution,sas.com/deployment=sas-viya"
+    },
+    "sas-job-execution-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-job-execution-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-job-execution-app:2.42.1-20250908.1757311611543",
+        "SELECTOR": "app.kubernetes.io/name=sas-job-execution-app,sas.com/deployment=sas-viya"
+    },
+    "sas-job-flow-scheduling": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-job-flow-scheduling",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-job-flow-scheduling:2.29.4-20250915.1757964469193",
+        "SELECTOR": "app.kubernetes.io/name=sas-job-flow-scheduling,sas.com/deployment=sas-viya"
+    },
+    "sas-landing-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "194d",
+        "CONTAINERS": "sas-landing-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-landing-app:1.38.8-20250911.1757591134401",
+        "SELECTOR": "app.kubernetes.io/name=sas-landing-app,sas.com/deployment=sas-viya"
+    },
+    "sas-launcher": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-launcher",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-launcher:1.103.5-20251008.1759934479179",
+        "SELECTOR": "app.kubernetes.io/name=sas-launcher,sas.com/deployment=sas-viya"
+    },
+    "sas-lineage-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-lineage-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-lineage-app:3.41.2-20250905.1757095565220",
+        "SELECTOR": "app.kubernetes.io/name=sas-lineage-app,sas.com/deployment=sas-viya"
+    },
+    "sas-localization": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-localization",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-localization:1.103.35-20251113.1763060677891",
+        "SELECTOR": "app.kubernetes.io/name=sas-localization,sas.com/deployment=sas-viya"
+    },
+    "sas-logon-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-logon-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-logon-app:3.41.7-20250917.1758118990967",
+        "SELECTOR": "app.kubernetes.io/name=sas-logon-app,sas.com/deployment=sas-viya"
+    },
+    "sas-microanalytic-score": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-microanalytic-score,viya4-mas-python-runner",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-microanalytic-score:2.707.36-20251118.1763503249691,01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-microanalytic-score:2.707.36-20251118.1763503249691",
+        "SELECTOR": "app.kubernetes.io/name=sas-microanalytic-score,sas.com/deployment=sas-viya"
+    },
+    "sas-migration-manager": {
+        "READY": "0/0",
+        "UP-TO-DATE": "0",
+        "AVAILABLE": "0",
+        "AGE": "326d",
+        "CONTAINERS": "sas-migration-manager",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-migration-manager:3.40.2-20250910.1757536066961",
+        "SELECTOR": "app.kubernetes.io/name=sas-migration-manager,sas.com/deployment=sas-viya"
+    },
+    "sas-ml-pipeline-automation": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-ml-pipeline-automation",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-ml-pipeline-automation:39.138.4-20250910.1757539645156",
+        "SELECTOR": "app.kubernetes.io/name=sas-ml-pipeline-automation,sas.com/deployment=sas-viya"
+    },
+    "sas-model-management": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-model-management",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-model-management:4.6.4-20250707.1751912747726",
+        "SELECTOR": "app.kubernetes.io/name=sas-model-management,sas.com/deployment=sas-viya"
+    },
+    "sas-model-manager": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "3d16h",
+        "CONTAINERS": "sas-model-manager",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-model-manager:5.11.2-20251031.1761923625273",
+        "SELECTOR": "app.kubernetes.io/name=sas-model-manager,sas.com/deployment=sas-viya"
+    },
+    "sas-model-manager-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-model-manager-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-model-manager-app:4.32.29-20251124.1764014358567",
+        "SELECTOR": "app.kubernetes.io/name=sas-model-manager-app,sas.com/deployment=sas-viya"
+    },
+    "sas-model-publish": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-model-publish",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-model-publish:4.37.9-20251029.1761751536025",
+        "SELECTOR": "app.kubernetes.io/name=sas-model-publish,sas.com/deployment=sas-viya"
+    },
+    "sas-model-repository": {
+        "READY": "0/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "0",
+        "AGE": "716d",
+        "CONTAINERS": "sas-model-repository",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-model-repository:4.5.19-20250707.1751912557779",
+        "SELECTOR": "app.kubernetes.io/name=sas-model-repository,sas.com/deployment=sas-viya"
+    },
+    "sas-model-studio-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-model-studio-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-model-studio-app:1.439.11-20251016.1760626381246",
+        "SELECTOR": "app.kubernetes.io/name=sas-model-studio-app,sas.com/deployment=sas-viya"
+    },
+    "sas-natural-language-generation": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-natural-language-generation",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-natural-language-generation:1.51.2-20250911.1757621825747",
+        "SELECTOR": "app.kubernetes.io/name=sas-natural-language-generation,sas.com/deployment=sas-viya"
+    },
+    "sas-office-addin-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-office-addin-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-office-addin-app:1.70.3-20250911.1757607987863",
+        "SELECTOR": "app.kubernetes.io/name=sas-office-addin-app,sas.com/deployment=sas-viya"
+    },
+    "sas-opendistro-operator": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-opendistro-operator",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-opendistro-operator:7.52.2-20250911.1757593776425",
+        "SELECTOR": "name=sas-opendistro-operator,sas.com/deployment=sas-viya"
+    },
+    "sas-preferences": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-preferences",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-preferences:1.108.0-20250904.1756981184044",
+        "SELECTOR": "app.kubernetes.io/name=sas-preferences,sas.com/deployment=sas-viya"
+    },
+    "sas-prepull": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-prepull",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-prepull:2.9.3-20250904.1757004219406",
+        "SELECTOR": "app.kubernetes.io/name=sas-prepull,sas.com/deployment=sas-viya"
+    },
+    "sas-readiness": {
+        "READY": "0/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "0",
+        "AGE": "716d",
+        "CONTAINERS": "sas-readiness",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-readiness:1.25.4-20251102.1762062981316",
+        "SELECTOR": "app.kubernetes.io/name=sas-readiness,sas.com/deployment=sas-viya"
+    },
+    "sas-redis-operator": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-redis-operator",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-redis-operator:1.16.7-20250310.1741623400403",
+        "SELECTOR": "app.kubernetes.io/name=sas-redis-operator,sas.com/deployment=sas-viya"
+    },
+    "sas-report-alerts": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-report-alerts",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-report-alerts:4.131.3-20250910.1757537473350",
+        "SELECTOR": "app.kubernetes.io/name=sas-report-alerts,sas.com/deployment=sas-viya"
+    },
+    "sas-report-distribution": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-report-distribution",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-report-distribution:2.122.3-20250911.1757599402506",
+        "SELECTOR": "app.kubernetes.io/name=sas-report-distribution,sas.com/deployment=sas-viya"
+    },
+    "sas-report-execution": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-report-execution",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-report-execution:2.354.30-20251113.1763071509690",
+        "SELECTOR": "app.kubernetes.io/name=sas-report-execution,sas.com/deployment=sas-viya"
+    },
+    "sas-report-renderers": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-report-renderers",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-report-renderers:5.67.8-20251015.1760537067161",
+        "SELECTOR": "app.kubernetes.io/name=sas-report-renderers,sas.com/deployment=sas-viya"
+    },
+    "sas-report-services-group": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-report-services-group",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-report-services-group:4.144.53-20251114.1763130181754",
+        "SELECTOR": "app.kubernetes.io/name=sas-report-services-group,sas.com/deployment=sas-viya"
+    },
+    "sas-scheduler": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-scheduler",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-scheduler:4.15.10-20251029.1761770130794",
+        "SELECTOR": "app.kubernetes.io/name=sas-scheduler,sas.com/deployment=sas-viya"
+    },
+    "sas-score-definitions": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-score-definitions",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-score-definitions:2.48.14-20250910.1757536557077",
+        "SELECTOR": "app.kubernetes.io/name=sas-score-definitions,sas.com/deployment=sas-viya"
+    },
+    "sas-score-execution": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-score-execution",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-score-execution:2.51.14-20250910.1757535893951",
+        "SELECTOR": "app.kubernetes.io/name=sas-score-execution,sas.com/deployment=sas-viya"
+    },
+    "sas-search": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-search",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-search:2.113.0-20250911.1757607416802",
+        "SELECTOR": "app.kubernetes.io/name=sas-search,sas.com/deployment=sas-viya"
+    },
+    "sas-studio": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-studio",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-studio:1.49.5-20251117.1763393339834",
+        "SELECTOR": "app.kubernetes.io/name=sas-studio,sas.com/deployment=sas-viya"
+    },
+    "sas-studio-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-studio-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-studio-app:7.9.8-20251111.1762870121877",
+        "SELECTOR": "app.kubernetes.io/name=sas-studio-app,sas.com/deployment=sas-viya"
+    },
+    "sas-studio-development": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-studio-development",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-studio-development:1.40.2-20250911.1757600843400",
+        "SELECTOR": "app.kubernetes.io/name=sas-studio-development,sas.com/deployment=sas-viya"
+    },
+    "sas-text-analytics-data": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "325d",
+        "CONTAINERS": "sas-text-analytics-data",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-text-analytics-data:6.82.2-20250911.1757612720631",
+        "SELECTOR": "app.kubernetes.io/name=sas-text-analytics-data,sas.com/deployment=sas-viya"
+    },
+    "sas-text-analytics-taxonomies": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "325d",
+        "CONTAINERS": "sas-text-analytics-taxonomies",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-text-analytics-taxonomies:7.22.4-20250925.1758762148183",
+        "SELECTOR": "app.kubernetes.io/name=sas-text-analytics-taxonomies,sas.com/deployment=sas-viya"
+    },
+    "sas-theme-designer-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-theme-designer-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-theme-designer-app:4.40.15-20250911.1757622257793",
+        "SELECTOR": "app.kubernetes.io/name=sas-theme-designer-app,sas.com/deployment=sas-viya"
+    },
+    "sas-transfer": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-transfer",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-transfer:2.88.32-20251104.1762281345957",
+        "SELECTOR": "app.kubernetes.io/name=sas-transfer,sas.com/deployment=sas-viya"
+    },
+    "sas-transformations": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-transformations",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202503/viya-4-x64_oci_linux_2-docker/sas-transformations:2.56.1-20250626.1750967713388",
+        "SELECTOR": "app.kubernetes.io/name=sas-transformations,sas.com/deployment=sas-viya"
+    },
+    "sas-visual-analytics": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-visual-analytics,sas-report-operations-core",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-visual-analytics:1.22.6-20250910.1757538831574,01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-report-operations-core:1.21.14-20250911.1757599146302",
+        "SELECTOR": "app.kubernetes.io/name=sas-visual-analytics,sas.com/deployment=sas-viya"
+    },
+    "sas-visual-analytics-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-visual-analytics-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-visual-analytics-app:3.435.4-20251022.1761100091533",
+        "SELECTOR": "app.kubernetes.io/name=sas-visual-analytics-app,sas.com/deployment=sas-viya"
+    },
+    "sas-web-assets": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "326d",
+        "CONTAINERS": "sas-web-assets",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-web-assets:3.130.3-20250911.1757618853841",
+        "SELECTOR": "app.kubernetes.io/name=sas-web-assets,sas.com/deployment=sas-viya"
+    },
+    "sas-workflow-engine": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "325d",
+        "CONTAINERS": "sas-workflow-engine",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-workflow-engine:7.4.13-20251117.1763405714584",
+        "SELECTOR": "app.kubernetes.io/name=sas-workflow-engine,sas.com/deployment=sas-viya"
+    },
+    "sas-workflow-history": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "325d",
+        "CONTAINERS": "sas-workflow-history",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-workflow-history:6.3.6-20251117.1763405275756",
+        "SELECTOR": "app.kubernetes.io/name=sas-workflow-history,sas.com/deployment=sas-viya"
+    },
+    "sas-workflow-manager-app": {
+        "READY": "1/1",
+        "UP-TO-DATE": "1",
+        "AVAILABLE": "1",
+        "AGE": "716d",
+        "CONTAINERS": "sas-workflow-manager-app",
+        "IMAGES": "01lpd-vmlharbor.sbmdc.org.tr/lts202509/viya-4-x64_oci_linux_2-docker/sas-workflow-manager-app:3.65.5-20250930.1759192187119",
+        "SELECTOR": "app.kubernetes.io/name=sas-workflow-manager-app,sas.com/deployment=sas-viya"
+    }
+}

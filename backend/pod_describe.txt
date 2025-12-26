@@ -1,0 +1,211 @@
+Name:             sas-workload-orchestrator-l8vm7
+Namespace:        drsasviya
+Priority:         0
+Service Account:  sas-workload-orchestrator
+Node:             ucodacompn.drinsight.uco.net.in/10.20.40.115
+Start Time:       Fri, 19 Dec 2025 17:15:31 +0530
+Labels:           app=sas-workload-orchestrator
+                  app.kubernetes.io/resource=sas-workload-orchestrator-daemon
+                  app.kubernetes.io/name=sas-workload-orchestrator
+                  controller-revision-hash=7c6696545d
+                  pod-template-generation=3
+                  sas.com/deployment=sas-viya
+                  workload.sas.com/class=compute
+Annotations:      k8s.ovn.org/pod-networks:
+                    {"default":{"ip_addresses":["10.129.4.93/23"],"mac_address":"0a:58:0a:81:04:5d","gateway_ips":["10.129.4.1"],"routes":[{"dest":"10.128.0.0...
+                  k8s.v1.cni.cncf.io/network-status:
+                    [{
+                        "name": "ovn-kubernetes",
+                        "interface": "eth0",
+                        "ips": [
+                            "10.129.4.93"
+                        ],
+                        "mac": "0a:58:0a:81:04:5d",
+                        "default": true,
+                        "dns": {}
+                    }]
+                  openshift.io/scc: restricted-v2
+                  prometheus.io/scheme: https
+                  sas.com/certificate-file-format: pem
+                  sas.com/resource-name: sas-workload-orchestrator
+                  sas.com/resource-version: 1.42.43-20251112.1762977038912
+                  sas.com/kustomize-base: base
+                  sas.com/tls-enabled-ports: all
+                  sas.com/tls-mode: full-stack
+                  sas.com/version: 1.42.43
+                  seccomp.security.alpha.kubernetes.io/pod: runtime/default
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               10.129.4.93
+IPs:
+  IP:           10.129.4.93
+Controlled By:  DaemonSet/sas-workload-orchestrator
+Init Containers:
+  sas-certframe:
+    Container ID:   cri-o://7f33332107dcb2cced8e883c63dd51a17ea77c6bc5ad0223aaf6c2795dfd8ae2
+    Image:          ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-certframe:3.63.1-20250305.1741209828679
+    Image ID:       ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-certframe@sha256:4c178dbc80607de2521c3114d6fd05c2e101ba244e7c5822023aad3d8f9857d7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 19 Dec 2025 17:15:31 +0530
+      Finished:     Fri, 19 Dec 2025 17:15:33 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  500Mi
+    Requests:
+      cpu:     50m
+      memory:  50Mi
+    Environment Variables from:
+      sas-certframe-config-6t84hm65mc                      ConfigMap  Optional: false
+      sas-certframe-ingress-certificate-config-6mt27h98mb  ConfigMap  Optional: false
+      sas-certframe-user-config-679cgdbhdt                 ConfigMap  Optional: false
+    Environment:
+      KUBE_POD_NAME:                       sas-workload-orchestrator-l8vm7 (v1:metadata.name)
+      SAS_CERTFRAME_TOKEN_DIR:             /certframe-token
+      SAS_ADDITIONAL_CA_CERTIFICATES_DIR:  /customer-provided-ca-certificates
+    Mounts:
+      /certframe-token from certframe-token (rw)
+      /customer-provided-ca-certificates from customer-provided-ca-certificates (rw)
+      /security from security (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-szl7k (ro)
+  sas-certframe-passphrase-generator:
+    Container ID:   cri-o://33108b7a068a25edfb417854ea8aa405849eb27daec0104c02a9a4048b2845c4
+    Image:          ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-certframe:3.63.1-20250305.1741209828679
+    Image ID:       ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-certframe@sha256:4c178dbc80607de2521c3114d6fd05c2e101ba244e7c5822023aad3d8f9857d7
+    Port:           <none>
+    Host Port:      <none>
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 19 Dec 2025 17:15:34 +0530
+      Finished:     Fri, 19 Dec 2025 17:15:34 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  500Mi
+    Requests:
+      cpu:     50m
+      memory:  50Mi
+    Environment:
+      SAS_KEYS_SECRET_NAME:        sas-workload-orchestrator-passphrase
+      SAS_KEYS_KEY_NAMES:          SGMG_PASSPHRASE
+      SAS_SECURITY_ARTIFACTS_DIR:  /security
+    Mounts:
+      /security from security (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-szl7k (ro)
+Containers:
+  sas-workload-orchestrator:
+    Container ID:   cri-o://fe4becd3b5aa7e08ed687f010f93b5c90305215d942f230efa6880f8405c6762
+    Image:          ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-workload-orchestrator:1.42.43-20251112.1762977038912
+    Image ID:       ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-workload-orchestrator@sha256:e543252ab107e934b240ed6773de262d748122944292de0a71f5bb1cf464e54f
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 19 Dec 2025 17:15:35 +0530
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  250Mi
+    Requests:
+      cpu:      100m
+      memory:   250Mi
+    Readiness:  http-get https://:http/internal/ready delay=0s timeout=2s period=10s #success=1 #failure=3
+    Environment Variables from:
+      sas-tls-config-dg85g4hfh8                                   ConfigMap  Optional: false
+      sas-shared-config-575cffckmk                                ConfigMap  Optional: false
+      sas-consul-client                                           Secret     Optional: false
+      sas-workload-orchestrator-parameters-862fg2h5h6             ConfigMap  Optional: false
+      sas-workload-orchestrator-initial-configuration-2gh6c5dft5  ConfigMap  Optional: false
+      sas-workload-orchestrator-passphrase                        Secret     Optional: false
+      sas-go-config-dtc6c5dbmm                                    ConfigMap  Optional: false
+    Environment:
+      SGMG_MANAGER_HOST:        0
+      SAS_K8S_DEPLOYMENT_NAME:  sas-workload-orchestrator
+      SGMG_LOGCONFIG_FILE:      logconfig.xml
+      SASCLOUDNATIVE:           1
+      POD_IP:                    (v1:status.podIP)
+      POD_NAME:                 sas-workload-orchestrator-l8vm7 (v1:metadata.name)
+    Mounts:
+      /opt/sas/viya/config/etc/SASSecurityCertificateFramework/cacerts from security (rw,path="cacerts")
+      /opt/sas/viya/config/etc/SASSecurityCertificateFramework/private from security (rw,path="private")
+      /opt/sas/viya/config/var/log/sgmg/default from config-var-log (rw)
+      /opt/sas/viya/config/var/run/sgmg/default from config-var-run (rw)
+      /scripts from scripts (rw)
+      /security from security (rw)
+      /tmp from temp-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-szl7k (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  scripts:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  security:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  config-var-log:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  config-var-run:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  temp-dir:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  certframe-token:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  sas-certframe-token
+    Optional:    false
+  customer-provided-ca-certificates:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      sas-customer-provided-ca-certificates-cf9b9m5b6g
+    Optional:  false
+  kube-api-access-szl7k:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+    ConfigMapName:           openshift-service-ca.crt
+    ConfigMapOptional:       <nil>
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+                             workload.sas.com/class=compute:NoSchedule
+Events:
+  Type     Reason          Age                     From               Message
+  ----     ------          ----                    ----               -------
+  Normal   Scheduled       127m                    default-scheduler  Successfully assigned drsasviya/sas-workload-orchestrator-l8vm7 to ucodacompn.drinsight.uco.net.in
+  Normal   AddedInterface  127m                    multus             Add eth0 [10.129.4.93/23] from ovn-kubernetes
+  Normal   Pulled          127m                    kubelet            Container image "ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-certframe:3.63.1-20250305.1741209828679" already present on machine
+  Normal   Created         127m                    kubelet            Created container sas-certframe
+  Normal   Started         127m                    kubelet            Started container sas-certframe
+  Normal   Pulled          127m                    kubelet            Container image "ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-certframe:3.63.1-20250305.1741209828679" already present on machine
+  Normal   Created         127m                    kubelet            Created container sas-certframe-passphrase-generator
+  Normal   Started         127m                    kubelet            Started container sas-certframe-passphrase-generator
+  Normal   Pulled          127m                    kubelet            Container image "ucodainfradrinsight.uco.net.in:8443/drsasviya/viya-4-x64_oci_linux_2-docker/sas-workload-orchestrator:1.42.43-20251112.1762977038912" already present on machine
+  Normal   Created         127m                    kubelet            Created container sas-workload-orchestrator
+  Normal   Started         127m                    kubelet            Started container sas-workload-orchestrator
+  Warning  Unhealthy       2m40s (x852 over 127m)  kubelet            Readiness probe failed: Get "https://10.129.4.93:8080/internal/ready": dial tcp 10.129.4.93:8080: connect: connection refused
