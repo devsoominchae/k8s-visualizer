@@ -21,6 +21,17 @@ def get_pod_containers(file_name: str):
         return pod_containers
     except Exception as e:
         return {"error": str(e)}
+
+@router.get("/workload_class",
+         summary="Returns pods grouped by SAS workload class.",
+         description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
+def get_pods_by_workload_class(file_name: str):
+    pod_info = PodInfo(file_name)
+    try:
+        pods_by_workload_class = pod_info.get_pods_by_workload_class()
+        return pods_by_workload_class
+    except Exception as e:
+        return {"error": str(e)}
     
     
 @router.get("/logs",

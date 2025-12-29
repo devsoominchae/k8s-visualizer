@@ -35,6 +35,23 @@ class PodInfo(Resource):
         
         return pod_init_containers
     
+    def get_pods_by_workload_class(self):
+        with TarController(self.file_name) as ctrl:
+            json_nodes_text = ctrl.get_file_content(self.json_pods_path)
+            pods_json = json.loads(json_nodes_text)
+            pods_by_workload_class = {}
+            for i in range(len(deep_get(pods_json, ["items"], []))):
+                name = deep_get(pods_json, ["items", i, "metadata", "name"])
+                
+                workdload_class = deep_get(pods_json, ["items", i, "metadata", "labels", "workload.sas.com/class"], "undefined")
+                
+                if workdload_class in pods_by_workload_class.keys():
+                    pods_by_workload_class[workdload_class].append(name)
+                else:
+                    pods_by_workload_class[workdload_class] = [name]
+        
+        return pods_by_workload_class
+    
     def get_pod_container_log(self, pod, container):
         """
         Returns log file content of the container in a pod
