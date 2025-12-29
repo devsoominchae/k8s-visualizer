@@ -23,3 +23,6 @@ app.include_router(resources.router)
 app.include_router(file_manager.router)
 
 # To test, run uvicorn main:app --reload
+# Read /etc/supervisord.d/k8s_visualizer_app.ini for details of monitoring
+# Run the following in local terminal and access localhost:9001 in the browser.
+# ssh -L 9001:localhost:9001 admin@trcv1171079.trc.sas.com
