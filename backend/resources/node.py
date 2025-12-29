@@ -1,5 +1,6 @@
 # node.py
 
+import re
 import json
 
 from resources.resources import Resource
@@ -45,7 +46,9 @@ class NodeInfo(Resource):
                 cpu_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "cpu"], "Allocatable node CPU unavailable")
                 cpu_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "cpu"], "Node CPU capacity unavailable")
                 memory_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "memory"], "Allocatable node memory unavailable")
+                memory_allocatable_gi = int(int(re.findall(r'\d+', memory_allocatable)[0]) / (1024 ** 2))
                 memory_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "memory"], "Node memory capacity unavailable")
+                memory_capacity_gi = int(int(re.findall(r'\d+', memory_capacity)[0]) / (1024 ** 2))
                 resources = deep_get(resources_dict, [name], "Node resources unavailable")
                 
                 os_image_logo = "/home/admin/k8s-visualizer/frontend/src/assets/default.png"
@@ -53,6 +56,7 @@ class NodeInfo(Resource):
                 for image_name in OS_LOGO_DICT.keys():
                     if image_name in os_image:
                         os_image_logo = OS_LOGO_DICT[image_name]
+
                 node_status[name] = {}
                 node_status[name]["annotations"] = annotations
                 node_status[name]["labels"] = labels
@@ -63,7 +67,9 @@ class NodeInfo(Resource):
                 node_status[name]["cpu_allocatable"] = cpu_allocatable
                 node_status[name]["cpu_capacity"] = cpu_capacity
                 node_status[name]["memory_allocatable"] = memory_allocatable
+                node_status[name]["memory_allocatable_gi"] = f"{memory_allocatable_gi} Gi"
                 node_status[name]["memory_capacity"] = memory_capacity
+                node_status[name]["memory_capacity_gi"] = f"{memory_capacity_gi} Gi"
                 node_status[name]["os_image"] = os_image
                 node_status[name]["os_image_logo"] = os_image_logo
                 node_status[name]["resources"] = resources
