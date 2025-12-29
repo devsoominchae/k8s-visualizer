@@ -22,18 +22,18 @@ class PodInfo(Resource):
         with TarController(self.file_name) as ctrl:
             json_nodes_text = ctrl.get_file_content(self.json_pods_path)
             pods_json = json.loads(json_nodes_text)
-            pod_init_containers = {}
+            pod_containers = {}
             for i in range(len(deep_get(pods_json, ["items"], []))):
                 name = deep_get(pods_json, ["items", i, "metadata", "name"])
                 
-                init_containers = [j['name'] for j in (deep_get(pods_json, ["items", i, "spec", "initContainers"]) or [])]
-                containers = [j['name'] for j in (deep_get(pods_json, ["items", i, "spec", "containers"]) or [])]
+                init_containers = {j["name"]: j for j in deep_get(pods_json, ["items", i, "status", "initContainerStatuses"]) or {}}
+                containers = {j["name"]: j for j in deep_get(pods_json, ["items", i, "status", "containerStatuses"]) or {}}
                 
-                pod_init_containers[name] = {}
-                pod_init_containers[name]["init_containers"] = init_containers
-                pod_init_containers[name]["containers"] = containers
+                pod_containers[name] = {}
+                pod_containers[name]["init_containers"] = init_containers
+                pod_containers[name]["containers"] = containers
         
-        return pod_init_containers
+        return pod_containers
     
     def get_pods_by_workload_class(self):
         with TarController(self.file_name) as ctrl:
