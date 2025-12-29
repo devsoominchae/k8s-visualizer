@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 @router.get("/status",
-         summary="Returns kubectl get <COMPONENT> output",
+         summary="Returns kubectl get <COMPONENT> output.",
          description="""Sample input: 
          \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
          \n - resource_name: configmaps""")
@@ -23,7 +23,7 @@ def get_resource_status(file_name: str, resource_name: str):
         return {"error": str(e)}
     
 @router.get("/describe",
-         summary="Returns kubectl describe <COMPONENT> output",
+         summary="Returns kubectl describe <COMPONENT> output.",
          description="""Sample input: 
          \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
          \n - resource_name: configmaps""")
@@ -48,7 +48,7 @@ def get_resource_describe_section(file_name: str, resource_name: str):
 
 
 @router.get("/list_names",
-         summary="Returns names of the <COMPONENT> as a list",
+         summary="Returns names of the <COMPONENT> as a list.",
          description="""Sample input: 
          \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
          \n - resource_name: configmaps""")
@@ -61,7 +61,7 @@ def get_resource_names(file_name: str, resource_name: str):
         return {"error": str(e)}
 
 @router.get("/avail_types",
-         summary="Returns available resource types as a list",
+         summary="Returns available resource types as a list.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
 def get_available_resource_types(file_name: str):
     resource_info = Resource(file_name)
