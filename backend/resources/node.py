@@ -7,6 +7,13 @@ from resources.resources import Resource
 from utils.tar_controller import TarController
 from utils.dict_utils import deep_get
 
+OS_LOGO_DICT = {
+    "Amazon": "/home/admin/k8s-visualizer/frontend/src/assets/amazon_linux.png",
+    "Red Hat": "/home/admin/k8s-visualizer/frontend/src/assets/rhel.png",
+    "Ubuntu": "/home/admin/k8s-visualizer/frontend/src/assets/ubuntu.png",
+    "Photon": "/home/admin/k8s-visualizer/frontend/src/assets/vmware_photon.png"
+}
+
 class NodeInfo(Resource):
     def __init__(self, file_name):
         super().__init__(file_name)
@@ -34,22 +41,31 @@ class NodeInfo(Resource):
                 taints = deep_get(nodes_json, ["items", i, "spec", "taints"], "Node taints unavailable")
                 ip = deep_get(nodes_json, ["items", i, "status", "addresses", 0, "address"], "Node ip unavailable")
                 workload_class = deep_get(labels, ["workload.sas.com/class"], "Node workload class unavailable")
+                allocatable_pods = deep_get(nodes_json, ["items", i, "status", "allocatable", "pods"], "Allocatable pods unavailable")
                 cpu_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "cpu"], "Allocatable node CPU unavailable")
                 cpu_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "cpu"], "Node CPU capacity unavailable")
                 memory_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "memory"], "Allocatable node memory unavailable")
                 memory_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "memory"], "Node memory capacity unavailable")
                 resources = deep_get(resources_dict, [name], "Node resources unavailable")
                 
+                os_image_logo = "/home/admin/k8s-visualizer/frontend/src/assets/default.png"
+                os_image = deep_get(nodes_json, ["items", i, "status", "nodeInfo", "osImage"], "Node OS image unavailable")
+                for image_name in OS_LOGO_DICT.keys():
+                    if image_name in os_image:
+                        os_image_logo = OS_LOGO_DICT[image_name]
                 node_status[name] = {}
                 node_status[name]["annotations"] = annotations
                 node_status[name]["labels"] = labels
                 node_status[name]["taints"] = taints
                 node_status[name]["ip"] = ip
                 node_status[name]["workload_class"] = workload_class
+                node_status[name]["allocatable_pods"] = allocatable_pods
                 node_status[name]["cpu_allocatable"] = cpu_allocatable
                 node_status[name]["cpu_capacity"] = cpu_capacity
                 node_status[name]["memory_allocatable"] = memory_allocatable
                 node_status[name]["memory_capacity"] = memory_capacity
+                node_status[name]["os_image"] = os_image
+                node_status[name]["os_image_logo"] = os_image_logo
                 node_status[name]["resources"] = resources
         
         return node_status
