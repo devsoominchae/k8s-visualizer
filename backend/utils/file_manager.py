@@ -26,7 +26,8 @@ def upload_file(file):
     return {
         "info": f"File '{file.filename}' saved at '{file_location}'",
         "content_type": file.content_type,
-        "upload_time_seconds": round(duration, 4) # Rounded for readability
+        "upload_time_seconds": round(duration, 4),
+        "file_location": file_location
     }
     
 def delete_file(filename: str):

@@ -9,7 +9,7 @@ export default function Dashboard({ fileName }: Props) {
   return (
     <>
       <EnvCard fileName={fileName} />
-      <PodCard></PodCard>
+      <PodCard fileName={fileName} />
     </>
   );
 }

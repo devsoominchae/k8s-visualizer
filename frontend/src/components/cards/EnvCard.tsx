@@ -1,6 +1,5 @@
-import { Heading, Text, Flex, Spinner } from "@radix-ui/themes";
+import { Heading, Text, Flex, Spinner, Badge, Card } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
-import Card from "./Card";
 import { fetchEnvInfo } from "../../api/env";
 
 type Props = {
@@ -8,9 +7,12 @@ type Props = {
 };
 
 type EnvInfo = {
-  cluster: string;
-  namespace: string;
-  status: string;
+  namespace?: string;
+  version?: string;
+  site_number?: string;
+  order?: string;
+  license_expires?: string;
+  tls_mode?: string;
 };
 
 export default function EnvCard({ fileName }: Props) {
@@ -18,35 +20,47 @@ export default function EnvCard({ fileName }: Props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetchEnvInfo(fileName)
       .then(setData)
       .finally(() => setLoading(false));
   }, [fileName]);
 
-  if (loading) {
-    return (
-      <Card>
-        <Spinner />
-      </Card>
-    );
-  }
-
-  if (!data) {
-    return (
-      <Card>
-        <Text color="red">Failed to load</Text>
-      </Card>
-    );
-  }
-
   return (
-    <Card>
-      <Flex direction="column" gap="2">
-        <Heading size="3">Environment</Heading>
-        <Text size="2">Cluster: {data.cluster}</Text>
-        <Text size="2">Namespace: {data.namespace}</Text>
-        <Text size="2">Status: {data.status}</Text>
-      </Flex>
+    <Card
+      style={{
+        padding: 24,
+        borderRadius: 14,
+        boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+        border: "1px solid var(--gray-a5)",
+        marginBottom: 24,
+      }}
+    >
+      {loading || !data ? (
+        <Flex align="center" justify="center" height="140px">
+          <Spinner />
+        </Flex>
+      ) : (
+        <Flex direction="column" gap="4">
+          <Flex justify="between" align="center">
+            <Heading size="4">Environment</Heading>
+            <Badge
+              style={{
+                backgroundColor: "#006DCF",
+                color: "white",
+              }}
+            >
+              {data.tls_mode ?? "full-stack"}
+            </Badge>
+          </Flex>
+
+          <Text><strong>Namespace:</strong> {data.namespace}</Text>
+          <Text><strong>Version:</strong> {data.version}</Text>
+          <Text><strong>Site Number:</strong> {data.site_number}</Text>
+          <Text><strong>Order:</strong> {data.order}</Text>
+          <Text><strong>License:</strong> {data.license_expires}</Text>
+        </Flex>
+      )}
     </Card>
   );
 }

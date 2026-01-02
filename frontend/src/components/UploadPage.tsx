@@ -1,5 +1,15 @@
-import { Flex, Heading, Text, Card } from "@radix-ui/themes";
-import { useRef } from "react";
+import {
+  Flex,
+  Heading,
+  Text,
+  Card,
+  Box,
+  Badge,
+  Spinner,
+  Dialog,
+} from "@radix-ui/themes";
+import { useRef, useState } from "react";
+import { uploadArchive } from "../api/upload";
 
 type Props = {
   onSuccess: (fileName: string) => void;
@@ -7,9 +17,11 @@ type Props = {
 
 export default function UploadPage({ onSuccess }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function openFileDialog() {
-    fileInputRef.current?.click();
+    if (!loading) fileInputRef.current?.click();
   }
 
   async function onFileSelected(e: React.ChangeEvent<HTMLInputElement>) {
@@ -17,45 +29,131 @@ export default function UploadPage({ onSuccess }: Props) {
 
     const file = e.target.files[0];
 
-    // TEMP (until POST upload is wired):
-    // simulate backend response using full path style
-    const simulatedFileName = `/home/admin/sample/${file.name}`;
+    try {
+      setError(null);
+      setLoading(true);
 
-    onSuccess(simulatedFileName);
+      const fileName = await uploadArchive(file);
+
+      onSuccess(fileName);
+    } catch (err) {
+      setError("Failed to process archive. Please try again.");
+      setLoading(false);
+    }
   }
 
   return (
-    <Flex
-      direction="column"
-      align="center"
-      justify="center"
-      height="100vh"
-      gap="5"
-    >
-      <Heading size="6">K8s-Visualizer</Heading>
-      <Text color="gray">Upload your environment file to continue</Text>
-
-      <input
-        type="file"
-        ref={fileInputRef}
-        hidden
-        onChange={onFileSelected}
-      />
-
-      <Card
-        onClick={openFileDialog}
+    <>
+      {/* MAIN CONTENT */}
+      <Flex
+        align="center"
+        justify="center"
         style={{
-          width: 420,
-          height: 220,
-          border: "2px dashed var(--gray-a7)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "#f5f6f8",
         }}
       >
-        <Text size="3">Click to upload file</Text>
-      </Card>
-    </Flex>
+        <Flex direction="column" align="center" gap="6">
+          {/* Header */}
+          <Flex direction="column" align="center" gap="2">
+            <Heading size="7">K8s Visualizer</Heading>
+            <Text size="3" color="gray">
+              Analyze SAS Viya Kubernetes environments
+            </Text>
+          </Flex>
+
+          {/* Upload Card */}
+          <Card
+            onClick={openFileDialog}
+            style={{
+              width: 520,
+              padding: 32,
+              borderRadius: 16,
+              boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
+              border: "1px solid var(--gray-a5)",
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.6 : 1,
+            }}
+          >
+            <Flex direction="column" align="center" gap="4">
+              <Box
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: "50%",
+                  background: "rgba(0,109,207,0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 32,
+                  color: "#006DCF",
+                }}
+              >
+                ⬆️
+              </Box>
+
+              <Heading size="4">Upload get-k8s-info.tgz</Heading>
+
+              <Text color="gray" align="center">
+                Click to upload the file collected from using
+                <br />
+                get-k8s-info tool.
+              </Text>
+
+              <Badge
+                style={{
+                  backgroundColor: "#006DCF",
+                  color: "white",
+                  padding: "6px 14px",
+                  borderRadius: 6,
+                }}
+              >
+                Select file
+              </Badge>
+
+              {error && (
+                <Text color="red" size="2">
+                  {error}
+                </Text>
+              )}
+            </Flex>
+          </Card>
+
+          <Text size="1" color="gray">
+            Supported format: <strong>.tgz</strong>
+          </Text>
+
+          {/* Hidden input */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            hidden
+            onChange={onFileSelected}
+          />
+        </Flex>
+      </Flex>
+
+      {/*Processing Part*/}
+      <Dialog.Root open={loading}>
+        <Dialog.Content
+          style={{
+            maxWidth: 360,
+            textAlign: "center",
+          }}
+        >
+          <Dialog.Title>Processing archive!</Dialog.Title>
+
+          <Flex direction="column" align="center" gap="4" mt="4">
+            <Spinner size="3" />
+            <Text color="gray">
+              Parsing your file...
+              <br />
+              This may take a moment 🙏
+            </Text>
+          </Flex>
+        </Dialog.Content>
+      </Dialog.Root>
+    </>
   );
 }
