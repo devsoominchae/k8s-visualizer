@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Sidebar, { Screen } from "./Sidebar";
 import Topbar from "./Topbar";
 import Dashboard from "./Dashboard";
-import NodesPage from "./nodes_temp/NodesPage";
+import NodesPage from "./nodes/NodesPage";
 import ComponentsPage from "./components/ComponentsPage";
 
 type Props = {

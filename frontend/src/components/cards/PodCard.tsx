@@ -13,11 +13,17 @@ type PodWorkloadMap = {
 export default function PodCard({ fileName }: Props) {
   const [data, setData] = useState<PodWorkloadMap | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
+
     fetchPodWorkloadClass(fileName)
       .then(setData)
+      .catch(() => {
+        setError("Unable to load pod workload information");
+      })
       .finally(() => setLoading(false));
   }, [fileName]);
 
@@ -30,11 +36,22 @@ export default function PodCard({ fileName }: Props) {
         border: "1px solid var(--gray-a5)",
       }}
     >
-      {loading || !data ? (
+      {/* Loading */}
+      {loading && (
         <Flex align="center" justify="center" height="140px">
           <Spinner />
         </Flex>
-      ) : (
+      )}
+
+      {/* Error */}
+      {!loading && error && (
+        <Flex align="center" justify="center" height="140px">
+          <Text color="red">{error}</Text>
+        </Flex>
+      )}
+
+      {/* Success */}
+      {!loading && !error && data && (
         <Flex direction="column" gap="4">
           <Heading size="4">Pods (by workload)</Heading>
 

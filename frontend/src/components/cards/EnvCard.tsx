@@ -18,11 +18,17 @@ type EnvInfo = {
 export default function EnvCard({ fileName }: Props) {
   const [data, setData] = useState<EnvInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
+
     fetchEnvInfo(fileName)
       .then(setData)
+      .catch(() => {
+        setError("Unable to load environment information");
+      })
       .finally(() => setLoading(false));
   }, [fileName]);
 
@@ -36,11 +42,22 @@ export default function EnvCard({ fileName }: Props) {
         marginBottom: 24,
       }}
     >
-      {loading || !data ? (
+      {/* Loading */}
+      {loading && (
         <Flex align="center" justify="center" height="140px">
           <Spinner />
         </Flex>
-      ) : (
+      )}
+
+      {/* Error */}
+      {!loading && error && (
+        <Flex align="center" justify="center" height="140px">
+          <Text color="red">{error}</Text>
+        </Flex>
+      )}
+
+      {/* Success */}
+      {!loading && !error && data && (
         <Flex direction="column" gap="4">
           <Flex justify="between" align="center">
             <Heading size="4">Environment</Heading>
@@ -54,11 +71,11 @@ export default function EnvCard({ fileName }: Props) {
             </Badge>
           </Flex>
 
-          <Text><strong>Namespace:</strong> {data.namespace}</Text>
-          <Text><strong>Version:</strong> {data.version}</Text>
-          <Text><strong>Site Number:</strong> {data.site_number}</Text>
-          <Text><strong>Order:</strong> {data.order}</Text>
-          <Text><strong>License:</strong> {data.license_expires}</Text>
+          <Text><strong>Namespace:</strong> {data.namespace ?? "-"}</Text>
+          <Text><strong>Version:</strong> {data.version ?? "-"}</Text>
+          <Text><strong>Site Number:</strong> {data.site_number ?? "-"}</Text>
+          <Text><strong>Order:</strong> {data.order ?? "-"}</Text>
+          <Text><strong>License:</strong> {data.license_expires ?? "-"}</Text>
         </Flex>
       )}
     </Card>

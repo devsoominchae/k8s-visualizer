@@ -39,7 +39,7 @@ async def get_resource_describe(file_name: str, resource_name: str):
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/describe_section",
-         summary="Returns kubectl describe daemonsets output sections.",
+         summary="Returns kubectl describe <COMPONENT> output sections.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
 @cache(expire=CACHE_TIMEOUT)
 async def get_resource_describe_section(file_name: str, resource_name: str):
