@@ -41,15 +41,17 @@ class NodeInfo(Resource):
             
             describe_nodes_text = ctrl.get_file_content(self.describe_resource_path)
             resources_dict = self.parse_describe_text(describe_nodes_text)
+            
+            get_node_output = self.get_resource_status()
 
             node_status = {}
             for i in range(len(deep_get(nodes_json, ["items"], []))):
                 name = deep_get(nodes_json, ["items", i, "metadata", "name"], "Node name unavailable")
-                annotations = deep_get(nodes_json, ["items", i, "metadata", "annotations"], "Node annotation unavailable")
+                # annotations = deep_get(nodes_json, ["items", i, "metadata", "annotations"], "Node annotation unavailable")
                 labels = deep_get(nodes_json, ["items", i, "metadata", "labels"], "Node labels unavailable")
-                taints = deep_get(nodes_json, ["items", i, "spec", "taints"], "Node taints unavailable")
+                # taints = deep_get(nodes_json, ["items", i, "spec", "taints"], "Node taints unavailable")
                 ip = deep_get(nodes_json, ["items", i, "status", "addresses", 0, "address"], "Node ip unavailable")
-                workload_class = deep_get(labels, ["workload.sas.com/class"], "Node workload class unavailable")
+                workload_class = deep_get(labels, ["workload.sas.com/class"], "N/A")
                 allocatable_pods = deep_get(nodes_json, ["items", i, "status", "allocatable", "pods"], "Allocatable pods unavailable")
                 cpu_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "cpu"], "Allocatable node CPU unavailable")
                 cpu_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "cpu"], "Node CPU capacity unavailable")
@@ -58,6 +60,8 @@ class NodeInfo(Resource):
                 memory_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "memory"], "Node memory capacity unavailable")
                 memory_capacity_gi = int(int(re.findall(r'\d+', memory_capacity)[0]) / (1024 ** 2))
                 resources = deep_get(resources_dict, [name], "Node resources unavailable")
+                status = get_node_output[name]
+                
                 
                 os_image_logo = "/home/admin/k8s-visualizer/frontend/src/assets/default.png"
                 os_image = deep_get(nodes_json, ["items", i, "status", "nodeInfo", "osImage"], "Node OS image unavailable")
@@ -66,9 +70,9 @@ class NodeInfo(Resource):
                         os_image_logo = OS_LOGO_DICT[image_name]
 
                 node_status[name] = {}
-                node_status[name]["annotations"] = annotations
-                node_status[name]["labels"] = labels
-                node_status[name]["taints"] = taints
+                # node_status[name]["annotations"] = annotations
+                # node_status[name]["labels"] = labels
+                # node_status[name]["taints"] = taints
                 node_status[name]["ip"] = ip
                 node_status[name]["workload_class"] = workload_class
                 node_status[name]["allocatable_pods"] = allocatable_pods
@@ -81,6 +85,7 @@ class NodeInfo(Resource):
                 node_status[name]["os_image"] = os_image
                 node_status[name]["os_image_logo"] = os_image_logo
                 node_status[name]["resources"] = resources
+                node_status[name]["status"] = status
         
         return node_status
     
