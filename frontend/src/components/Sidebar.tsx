@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@radix-ui/themes";
 
-export type Screen = "details" | "nodes" | "workloads";
+export type Screen = "details" | "statefulsets" | "services" | "secrets" | "serviceaccounts" | "securitycontextconstraints" | "nodes" | "pods" | "nodes_temp" | "deployments" | "configmaps" | "cronjobs" | "daemonsets" | "endpoints" | "jobs" | "persistentvolumeclaims" | "replicasets" | "rolebindings" | "roles";
 
 type Props = {
   active: Screen;
@@ -10,17 +10,38 @@ type Props = {
 export default function Sidebar({ active, onSelect }: Props) {
   const items: { key: Screen; label: string }[] = [
     { key: "details", label: "Details" },
-    { key: "nodes", label: "Nodes" },
-    { key: "workloads", label: "Workloads" },
+    // { key: "nodes", label: "Nodes" },
+    { key: "nodes_temp", label: "Nodes" },
+    { key: "pods", label: "Pods" },
+    { key: "deployments", label: "Deployments" },
+    { key: "services", label: "Services" },
+    { key: "configmaps", label: "Configmaps" },
+    { key: "cronjobs", label: "Cronjobs" },
+    { key: "daemonsets", label: "Daemonsets" },
+    { key: "endpoints", label: "Endpoints" },
+    { key: "jobs", label: "Jobs" },
+    { key: "persistentvolumeclaims", label: "PVCs" },
+    { key: "replicasets", label: "Replicasets" },
+    { key: "rolebindings", label: "Rolebindings" },
+    { key: "roles", label: "Roles" },
+    { key: "secrets", label: "Secrets" },
+    { key: "securitycontextconstraints", label: "SCCs" },
+    { key: "serviceaccounts", label: "Serviceaccounts" },
+    { key: "statefulsets", label: "Statefulsets" },
   ];
 
   return (
     <Box
       width="220px"
       p="4"
+      className="custom-scrollbar"
       style={{
         borderRight: "1px solid var(--gray-a6)",
         background: "var(--gray-a1)",
+        height: "100vh",       // Take full viewport height
+        position: "sticky",    // Optional: Keep it fixed while page scrolls
+        top: 0,
+        overflowY: "auto",     // Enable vertical scrolling
       }}
     >
       <Flex direction="column" gap="3">
