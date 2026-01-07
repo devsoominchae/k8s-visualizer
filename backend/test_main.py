@@ -14,11 +14,9 @@ def setup_test_cache():
 
 
 from main import app
+from conf_test import UPLOAD_DIR, TEST_FILE_NAME
 
 client = TestClient(app)
-UPLOAD_DIR = "/tmp"
-TEST_FILE_NAME = "/home/admin/sample/CS0343372_20251215_100140.tgz"
-TEST_CONTENT_PATH = "/home/admin/k8s-visualizer/backend/test"
 
 def test_upload_delete():
     """Test uploading a file and then deleting it."""
@@ -55,6 +53,17 @@ def test_get_node_status():
     }
     response = client.get(
         "/api/node/status",
+        params = params
+    )
+    
+    assert response.status_code == 200
+    
+def test_get_node_output():
+    params = {
+        "file_name": TEST_FILE_NAME
+    }
+    response = client.get(
+        "/api/node/get_nodes",
         params = params
     )
     
