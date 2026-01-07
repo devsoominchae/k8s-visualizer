@@ -19,6 +19,6 @@ class PVCInfo(Resource):
         pvc_status = self.get_resource_status()
         pvc_pv_mapping = {pvc: pvc_status[pvc]['VOLUME'] for pvc in pvc_status}
         
-        pv_describe = {pvc: pv_describe_clusterwide[pvc_pv_mapping[pvc]] for pvc in self.names}
+        pv_describe = {pvc: pv_describe_clusterwide.get(pvc_pv_mapping[pvc], "Not found") for pvc in self.names}
         
         return pv_describe

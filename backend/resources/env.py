@@ -34,5 +34,6 @@ class EnvInfo:
                     if line.startswith(prefix):
                         self.env_info_dict[key] = line[line.find(":") + 1:].strip()
                         break
-
+            
+            assert 'namespace' in self.env_info_dict.keys(), "The get-k8s-info output file is inavlid."
             return self.env_info_dict
