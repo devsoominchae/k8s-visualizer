@@ -1,10 +1,20 @@
 # main.py
 
+from redis import asyncio as aioredis
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    yield
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 from routers import node, env, pod, pvc, resources, file_manager
 
 # Crucial: Allow React (port 5173 or 3000) to talk to Python

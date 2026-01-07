@@ -1,0 +1,1 @@
+CACHE_TIMEOUT = 60 * 10 # 60 seconds x 10 = 10 minutes

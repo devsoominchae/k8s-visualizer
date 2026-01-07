@@ -1,9 +1,10 @@
 from typing import List
 from fastapi import APIRouter, HTTPException, Query
+from fastapi_cache.decorator import cache
 
 
 from resources.pod import PodInfo
-
+from utils.conf import CACHE_TIMEOUT
 from utils.log_controller import LogController
 
 router = APIRouter(
@@ -14,7 +15,8 @@ router = APIRouter(
 @router.get("/containers",
          summary="Returns InitContainers and Containers of a pod.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_pod_containers(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_pod_containers(file_name: str):
     pod_info = PodInfo(file_name)
     try:
         pod_containers = pod_info.get_pod_containers()
@@ -25,7 +27,8 @@ def get_pod_containers(file_name: str):
 @router.get("/workload_class",
          summary="Returns pods grouped by SAS workload class.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_pods_by_workload_class(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_pods_by_workload_class(file_name: str):
     pod_info = PodInfo(file_name)
     try:
         pods_by_workload_class = pod_info.get_pods_by_workload_class()
@@ -43,7 +46,8 @@ def get_pods_by_workload_class(file_name: str):
              \n- requested_items: ['timeStamp', 'level', 'message']
              \n- requested_level: warn
          """)
-def parse_log(
+@cache(expire=CACHE_TIMEOUT)
+async def parse_log(
     file_name: str, 
     pod: str, 
     container: str, 

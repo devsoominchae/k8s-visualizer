@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException
+from fastapi_cache.decorator import cache
 
+from utils.conf import CACHE_TIMEOUT
 from resources.resources import Resource
 
 
@@ -13,7 +15,8 @@ router = APIRouter(
          description="""Sample input: 
          \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
          \n - resource_name: configmaps""")
-def get_resource_status(file_name: str, resource_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_resource_status(file_name: str, resource_name: str):
     resource_info = Resource(file_name, resource_name)
     try:
         resource_status = resource_info.get_resource_status()
@@ -26,7 +29,8 @@ def get_resource_status(file_name: str, resource_name: str):
          description="""Sample input: 
          \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
          \n - resource_name: configmaps""")
-def get_resource_describe(file_name: str, resource_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_resource_describe(file_name: str, resource_name: str):
     resource_info = Resource(file_name, resource_name)
     try:
         resource_describe = resource_info.get_resource_describe()
@@ -37,7 +41,8 @@ def get_resource_describe(file_name: str, resource_name: str):
 @router.get("/describe_section",
          summary="Returns kubectl describe daemonsets output sections.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_resource_describe_section(file_name: str, resource_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_resource_describe_section(file_name: str, resource_name: str):
     resource_info = Resource(file_name, resource_name)
     try:
         resource_describe_section = resource_info.get_resource_describe_section()
@@ -51,7 +56,8 @@ def get_resource_describe_section(file_name: str, resource_name: str):
          description="""Sample input: 
          \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
          \n - resource_name: configmaps""")
-def get_resource_names(file_name: str, resource_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_resource_names(file_name: str, resource_name: str):
     resource_info = Resource(file_name, resource_name)
     try:
         resource_names = resource_info.get_resource_names()
@@ -62,7 +68,8 @@ def get_resource_names(file_name: str, resource_name: str):
 @router.get("/avail_types",
          summary="Returns available resource types as a list.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_available_resource_types(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_available_resource_types(file_name: str):
     resource_info = Resource(file_name)
     try:
         avail_resource_types = resource_info.get_available_resource_types()

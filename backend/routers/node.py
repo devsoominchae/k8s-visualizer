@@ -1,15 +1,19 @@
 from fastapi import APIRouter, HTTPException
+from fastapi_cache.decorator import cache
+
 router = APIRouter(
     prefix="/api/node",
     tags=["Node Information"]
 )
 
+from utils.conf import CACHE_TIMEOUT
 from resources.node import NodeInfo
 
 @router.get("/status",
          summary="Returns detailed information of the nodes in the cluster.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_node_status(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_node_status(file_name: str):
     node_info = NodeInfo(file_name)
     try:
         node_status = node_info.get_node_status()
@@ -20,7 +24,8 @@ def get_node_status(file_name: str):
 @router.get("/describe",
          summary="Returns kubectl describe output of the nodes in the cluster.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_node_describe(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_node_describe(file_name: str):
     node_info = NodeInfo(file_name)
     try:
         node_describe = node_info.get_resource_describe()
@@ -31,7 +36,8 @@ def get_node_describe(file_name: str):
 @router.get("/list_names",
          summary="Returns names of nodes as a list.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_node_names(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_node_names(file_name: str):
     node_info = NodeInfo(file_name)
     try:
         node_names = node_info.get_resource_names()
@@ -42,7 +48,8 @@ def get_node_names(file_name: str):
 @router.get("/describe_section",
          summary="Returns kubectl describe node output sections.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_node_describe_section(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_node_describe_section(file_name: str):
     node_info = NodeInfo(file_name)
     try:
         node_describe_section = node_info.get_resource_describe_section()
@@ -53,7 +60,8 @@ def get_node_describe_section(file_name: str):
 @router.get("/get_nodes",
          summary="Returns kubectl get nodes output.",
          description="Sample input: /home/admin/sample/CS0343372_20251215_100140.tgz")
-def get_nodes(file_name: str):
+@cache(expire=CACHE_TIMEOUT)
+async def get_nodes(file_name: str):
     node_info = NodeInfo(file_name)
     try:
         node_status = node_info.get_resource_status()
