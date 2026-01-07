@@ -59,7 +59,7 @@ async def parse_log(
         log_text = pod_info.get_pod_container_log(pod, container)
 
         if not log_text:
-            raise ValueError(f"No logs found for pod '{pod}' in container '{container}'")
+            return f"No logs found for pod '{pod}' in container '{container}'"
 
         log_ctrl = LogController(
             log_text, 

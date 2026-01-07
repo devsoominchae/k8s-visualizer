@@ -2,6 +2,7 @@
 
 import re
 import json
+import yaml
 
 from resources.resources import Resource
 
@@ -21,6 +22,7 @@ class NodeInfo(Resource):
         
         self.file_name = file_name
         self.json_nodes_path = "./kubernetes/clusterwide/json/nodes.json"
+        self.yaml_nodes_path = "./kubernetes/clusterwide/yaml/nodes.yaml"
         self.get_resource_path = "./kubernetes/clusterwide/get/nodes.txt"
         self.describe_resource_path = "./kubernetes/clusterwide/describe/nodes.txt"
         
@@ -28,8 +30,14 @@ class NodeInfo(Resource):
     
     def get_node_status(self):
         with TarController(self.file_name) as ctrl:
-            json_nodes_text = ctrl.get_file_content(self.json_nodes_path)
-            nodes_json = json.loads(json_nodes_text)
+            nodes_json = ""
+            
+            if ctrl.file_exists_in_tar(self.json_nodes_path):
+                json_nodes_text = ctrl.get_file_content(self.json_nodes_path)
+                nodes_json = json.loads(json_nodes_text)
+            else:
+                node_yaml_text = ctrl.get_file_content(self.yaml_nodes_path)
+                nodes_json = yaml.safe_load(node_yaml_text)
             
             describe_nodes_text = ctrl.get_file_content(self.describe_resource_path)
             resources_dict = self.parse_describe_text(describe_nodes_text)

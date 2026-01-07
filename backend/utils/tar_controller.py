@@ -16,6 +16,13 @@ class TarController:
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.tar:
             self.tar.close()
+    
+    def file_exists_in_tar(self, file_to_find):
+        with tarfile.open(self.tgz_path, "r:*") as tar:
+            # getnames() returns a list of all member names
+            if file_to_find in tar.getnames():
+                return True
+        return False
 
     def list_files_in_dir(self, folder_path=""):
         """Lists files inside a specific folder within the archive."""
