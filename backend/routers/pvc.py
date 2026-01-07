@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 
 from resources.pvc import PVCInfo
@@ -18,4 +18,4 @@ def get_pv_describe(file_name: str):
         pv_describe = pvc_info.get_pv_describe()
         return pv_describe
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))

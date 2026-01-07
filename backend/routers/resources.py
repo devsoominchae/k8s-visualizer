@@ -1,5 +1,4 @@
-from fastapi import APIRouter
-
+from fastapi import APIRouter, HTTPException
 
 from resources.resources import Resource
 
@@ -20,7 +19,7 @@ def get_resource_status(file_name: str, resource_name: str):
         resource_status = resource_info.get_resource_status()
         return resource_status
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/describe",
          summary="Returns kubectl describe <COMPONENT> output.",
@@ -33,7 +32,7 @@ def get_resource_describe(file_name: str, resource_name: str):
         resource_describe = resource_info.get_resource_describe()
         return resource_describe
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/describe_section",
          summary="Returns kubectl describe daemonsets output sections.",
@@ -44,7 +43,7 @@ def get_resource_describe_section(file_name: str, resource_name: str):
         resource_describe_section = resource_info.get_resource_describe_section()
         return resource_describe_section
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/list_names",
@@ -58,7 +57,7 @@ def get_resource_names(file_name: str, resource_name: str):
         resource_names = resource_info.get_resource_names()
         return resource_names
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/avail_types",
          summary="Returns available resource types as a list.",
@@ -69,4 +68,4 @@ def get_available_resource_types(file_name: str):
         avail_resource_types = resource_info.get_available_resource_types()
         return avail_resource_types
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))

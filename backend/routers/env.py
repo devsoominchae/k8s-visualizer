@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+
 router = APIRouter(
     prefix="/api/env",
     tags=["Environment Information"]
@@ -15,4 +16,4 @@ def get_env_info_dict(file_name: str):
         env_info_dict = env_info.get_env_info_dict()
         return env_info_dict
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=f"There was an error parsing the environment information: {e}")

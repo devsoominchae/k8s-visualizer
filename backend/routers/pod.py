@@ -20,7 +20,7 @@ def get_pod_containers(file_name: str):
         pod_containers = pod_info.get_pod_containers()
         return pod_containers
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/workload_class",
          summary="Returns pods grouped by SAS workload class.",
@@ -31,8 +31,7 @@ def get_pods_by_workload_class(file_name: str):
         pods_by_workload_class = pod_info.get_pods_by_workload_class()
         return pods_by_workload_class
     except Exception as e:
-        return {"error": str(e)}
-    
+        raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/logs",
          summary="Returns parsed output of a specific container of a pod",
