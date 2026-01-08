@@ -6,7 +6,8 @@ class EnvInfo:
     def __init__(self, file_name):
         self.file_name = file_name
         
-        self.get_k8s_info_log_path = "./.get-k8s-info/get-k8s-info.log"
+        self.get_k8s_info_log_path = ["./.get-k8s-info/get-k8s-info.log",
+                                      ".get-k8s-info/get-k8s-info.log"]
     
     def get_env_info_dict(self):
         parsers = {
@@ -27,7 +28,11 @@ class EnvInfo:
 
         with TarController(self.file_name) as ctrl:
             self.env_info_dict = {}
-            content = ctrl.get_file_content(self.get_k8s_info_log_path)
+            content = None
+            for get_k8s_info_log_path in self.get_k8s_info_log_path:                
+                temp_content = ctrl.get_file_content(get_k8s_info_log_path)
+                if temp_content is not None:
+                    content = temp_content
             
             for line in content.splitlines():
                 for prefix, key in parsers.items():

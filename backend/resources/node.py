@@ -16,6 +16,18 @@ OS_LOGO_DICT = {
     "Photon": "/home/admin/k8s-visualizer/frontend/src/assets/vmware_photon.png"
 }
 
+DEAFULT_RESOURCES = {
+      "non_terminated_pods": "0",
+      "cpu_requests": "N/A",
+      "cpu_requests_pct": "0",
+      "cpu_limits": "N/A",
+      "cpu_limits_pct": "0",
+      "memory_requests": "N/A",
+      "memory_requests_pct": "0",
+      "memory_limits": "N/A",
+     
+}
+
 class NodeInfo(Resource):
     def __init__(self, file_name):
         super().__init__(file_name)
@@ -48,7 +60,7 @@ class NodeInfo(Resource):
             for i in range(len(deep_get(nodes_json, ["items"], []))):
                 name = deep_get(nodes_json, ["items", i, "metadata", "name"], "Node name unavailable")
                 # annotations = deep_get(nodes_json, ["items", i, "metadata", "annotations"], "Node annotation unavailable")
-                labels = deep_get(nodes_json, ["items", i, "metadata", "labels"], "Node labels unavailable")
+                labels = deep_get(nodes_json, ["items", i, "metadata", "labels"], {})
                 # taints = deep_get(nodes_json, ["items", i, "spec", "taints"], "Node taints unavailable")
                 ip = deep_get(nodes_json, ["items", i, "status", "addresses", 0, "address"], "Node ip unavailable")
                 workload_class = deep_get(labels, ["workload.sas.com/class"], "N/A")
@@ -59,7 +71,7 @@ class NodeInfo(Resource):
                 memory_allocatable_gi = int(int(re.findall(r'\d+', memory_allocatable)[0]) / (1024 ** 2))
                 memory_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "memory"], "Node memory capacity unavailable")
                 memory_capacity_gi = int(int(re.findall(r'\d+', memory_capacity)[0]) / (1024 ** 2))
-                resources = deep_get(resources_dict, [name], "Node resources unavailable")
+                resources = deep_get(resources_dict, [name], DEAFULT_RESOURCES)
                 status = get_node_output[name]
                 
                 
@@ -70,9 +82,6 @@ class NodeInfo(Resource):
                         os_image_logo = OS_LOGO_DICT[image_name]
 
                 node_status[name] = {}
-                # node_status[name]["annotations"] = annotations
-                # node_status[name]["labels"] = labels
-                # node_status[name]["taints"] = taints
                 node_status[name]["ip"] = ip
                 node_status[name]["workload_class"] = workload_class
                 node_status[name]["allocatable_pods"] = allocatable_pods

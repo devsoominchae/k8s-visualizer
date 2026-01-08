@@ -27,6 +27,8 @@ class TarController:
     def list_files_in_dir(self, folder_path=""):
         """Lists files inside a specific folder within the archive."""
         # 1. Get all paths from the tarball
+        if not self.file_exists_in_tar(folder_path):
+            folder_path = folder_path.replace("./", "")
         if not self.tar:
             with tarfile.open(self.tgz_path, "r:gz") as tar:
                 all_names = tar.getnames()
@@ -53,6 +55,8 @@ class TarController:
         Reads any file's content.
         :param as_text: If True, returns a string (UTF-8). If False, returns raw bytes.
         """
+        if not self.file_exists_in_tar(internal_path):
+            internal_path = internal_path.replace("./", "")
         opened_locally = False
         if not self.tar:
             self.tar = tarfile.open(self.tgz_path, "r:gz")
