@@ -70,13 +70,6 @@ export function NodesSummaryCard({ fileName, nodeName, details }: NodeCardProps)
 
   const isReady = details.status?.STATUS?.toLowerCase() === "ready";
 
-  function scrollToSection(index: number) {
-    const el = sectionRefs.current[index];
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
-
   return (
     <Card size="2">
       <Flex gap="4" align="center">
@@ -115,18 +108,13 @@ export function NodesSummaryCard({ fileName, nodeName, details }: NodeCardProps)
               <Text size="2" weight="bold" style={{ wordBreak: "break-all" }}>
                 {nodeName}
               </Text>
-
             </Flex>
-
-
-
             {/* IP address stays underneath */}
             <Text as="div" size="2" color="gray">
               {details.ip}
             </Text>
           </Box>
         </Flex>
-
         <Badge color={isReady ? "green" : "red"} size="1" variant="soft">
           {details.status?.STATUS ?? "Unknown"}
         </Badge>
