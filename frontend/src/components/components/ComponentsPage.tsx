@@ -5,6 +5,7 @@ import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { useEffect, useState, useMemo } from "react";
 import { fetchComponentStatus, fetchComponentDescribe, fetchComponentDescribeSections } from "../../api/component";
 import { ComponentsSummaryCard } from "./ComponentsSummaryCard";
+import ErrorBoundary from "../../common/ErrorBoundary";
 
 type Props = {
     fileName: string;
@@ -117,16 +118,18 @@ export default function ComponentsPage({ fileName, component }: Props) {
             {resourceEntries.length > 0 ? (
                 <Flex direction="column" gap="2">
                     {resourceEntries.map(([name, details]) => (
-                        <ComponentsSummaryCard
-                            key={name}
-                            componentName={name} // Renamed for generic use
-                            details={details}
-                            fileName={fileName}
-                            component={component}
-                            visibleColumns={visibleColumns}
-                            describeMap={describeMap}
-                            describeHeaderMap={describeHeaderMap}
-                        />
+                        <ErrorBoundary key={name}>
+                            <ComponentsSummaryCard
+                                key={name}
+                                componentName={name}
+                                details={details}
+                                fileName={fileName}
+                                component={component}
+                                visibleColumns={visibleColumns}
+                                describeMap={describeMap}
+                                describeHeaderMap={describeHeaderMap}
+                            />
+                        </ErrorBoundary>
                     ))}
                 </Flex>
             ) : (

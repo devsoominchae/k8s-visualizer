@@ -4,6 +4,7 @@ import { Flex, Heading, Spinner, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { fetchNodeStatus } from "../../api/node";
 import { NodesSummaryCard } from "./NodesSummaryCard";
+import ErrorBoundary from "../../common/ErrorBoundary";
 
 type Props = {
   fileName: string;
@@ -43,15 +44,19 @@ export default function NodesPage({ fileName }: Props) {
 
       {nodeEntries.length > 0 ? (
         nodeEntries.map(([nodeName, details]) => (
-          <NodesSummaryCard
-            key={nodeName}
-            fileName={fileName}
-            nodeName={nodeName}
-            details={details}
-          />
+          // Wrap each card in its own boundary
+          <ErrorBoundary key={nodeName}>
+            <NodesSummaryCard
+              fileName={fileName}
+              nodeName={nodeName}
+              details={details}
+            />
+          </ErrorBoundary>
         ))
       ) : (
-        <Text color="gray">No node data available.</Text>
+        <Flex align="center" justify="center" p="8">
+          <Text color="gray">No node data available.</Text>
+        </Flex>
       )}
     </Flex>
   );
