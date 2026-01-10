@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@radix-ui/themes";
 
-export type Screen = "details" | "statefulsets" | "services" | "secrets" | "serviceaccounts" | "securitycontextconstraints" | "nodes" | "pods" | "nodes_temp" | "deployments" | "configmaps" | "cronjobs" | "daemonsets" | "endpoints" | "jobs" | "persistentvolumeclaims" | "replicasets" | "rolebindings" | "roles";
+export type Screen = "details" | "statefulsets" | "services" | "secrets" | "serviceaccounts" | "securitycontextconstraints" | "pods" | "nodes" | "deployments" | "configmaps" | "cronjobs" | "daemonsets" | "endpoints" | "jobs" | "persistentvolumeclaims" | "replicasets" | "rolebindings" | "roles";
 
 type Props = {
   active: Screen;
@@ -10,11 +10,11 @@ type Props = {
 export default function Sidebar({ active, onSelect }: Props) {
   const items: { key: Screen; label: string }[] = [
     { key: "details", label: "Details" },
-    // { key: "nodes", label: "Nodes" },
-    { key: "nodes_temp", label: "Nodes" },
+    { key: "nodes", label: "Nodes" },
     { key: "pods", label: "Pods" },
     { key: "deployments", label: "Deployments" },
     { key: "services", label: "Services" },
+    { key: "statefulsets", label: "Statefulsets" },
     { key: "configmaps", label: "Configmaps" },
     { key: "cronjobs", label: "Cronjobs" },
     { key: "daemonsets", label: "Daemonsets" },
@@ -26,8 +26,7 @@ export default function Sidebar({ active, onSelect }: Props) {
     { key: "roles", label: "Roles" },
     { key: "secrets", label: "Secrets" },
     { key: "securitycontextconstraints", label: "SCCs" },
-    { key: "serviceaccounts", label: "Serviceaccounts" },
-    { key: "statefulsets", label: "Statefulsets" },
+    { key: "serviceaccounts", label: "Serviceaccounts" }
   ];
 
   return (
