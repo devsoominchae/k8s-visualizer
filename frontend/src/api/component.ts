@@ -28,18 +28,3 @@ export async function fetchComponentDescribe(
 
     return res.json();
 }
-
-export async function fetchComponentDescribeSections(
-    fileName: string,
-    component: string
-): Promise<string[]> {
-    const res = await fetch(
-        `/api/resource/describe_section?file_name=${encodeURIComponent(fileName)}&resource_name=${encodeURIComponent(component)}`
-    );
-
-    if (!res.ok) {
-        throw new Error("Failed to fetch component describe section");
-    }
-
-    return res.json();
-}

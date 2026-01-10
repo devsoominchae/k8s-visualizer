@@ -37,37 +37,18 @@ async def get_pods_by_workload_class(file_name: str):
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/logs",
-         summary="Returns parsed output of a specific container of a pod",
+         summary="Returns parsed output each pod and containers",
          description="""
-         Sample input:
-             \n- file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
-             \n- pod: sas-configuration-6798fcdb8c-cc6dc
-             \n- container: sas-configuration
-             \n- requested_items: ['timeStamp', 'level', 'message']
-             \n- requested_level: warn
+         Sample input: 
+         \n - file_name: /home/admin/sample/CS0343372_20251215_100140.tgz
+         \n - pod: sas-transformations-5c95d977dd-82kl5
+         \n - container: sas-transformations
          """)
 @cache(expire=CACHE_TIMEOUT)
-async def parse_log(
-    file_name: str, 
-    pod: str, 
-    container: str, 
-    requested_items: List[str] = Query(default=['timeStamp', 'level', 'message']), 
-    requested_level: str = "info"
-):
+async def get_pod_container_log(file_name: str, pod: str, container: str):
+    pod_info = PodInfo(file_name)
     try:
-        pod_info = PodInfo(file_name)
-        log_text = pod_info.get_pod_container_log(pod, container)
-
-        if not log_text:
-            return f"No logs found for pod '{pod}' in container '{container}'"
-
-        log_ctrl = LogController(
-            log_text, 
-            requested_items=requested_items, 
-            requested_level=requested_level
-        )
-        
-        return log_ctrl.parse_log()
-
+        pod_container_log = pod_info.get_pod_container_log(pod, container)
+        return pod_container_log
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

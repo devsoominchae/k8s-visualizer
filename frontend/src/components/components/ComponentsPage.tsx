@@ -9,7 +9,7 @@ import {
     ArrowUpIcon, ArrowDownIcon, Cross1Icon,
 } from "@radix-ui/react-icons";
 import { useEffect, useState, useMemo } from "react";
-import { fetchComponentStatus, fetchComponentDescribe, fetchComponentDescribeSections } from "../../api/component";
+import { fetchComponentStatus, fetchComponentDescribe } from "../../api/component";
 import { ComponentsSummaryCard } from "./ComponentsSummaryCard";
 import ErrorBoundary from "../../common/ErrorBoundary";
 
