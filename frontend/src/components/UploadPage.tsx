@@ -142,12 +142,12 @@ export default function UploadPage({ onSuccess }: Props) {
             textAlign: "center",
           }}
         >
-          <Dialog.Title>Processing archive!</Dialog.Title>
+          <Dialog.Title>Uploading archive!</Dialog.Title>
 
           <Flex direction="column" align="center" gap="4" mt="4">
             <Spinner size="3" />
             <Text color="gray">
-              Parsing your file...
+              Uploading your file...
               <br />
               This may take a moment 🙏
             </Text>
