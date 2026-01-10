@@ -10,10 +10,6 @@ import amazonLogo from "../../assets/amazon_linux.png";
 import vmwareLogo from "../../assets/vmware_photon.png";
 import defaultLogo from "../../assets/default.png";
 
-type Props = {
-  fileName: string;
-  node: string;
-};
 
 // Map the filename from the backend string to the imported local asset
 const LOGO_MAP: Record<string, string> = {
@@ -43,9 +39,9 @@ interface NodeDetails {
 
 
 interface NodeCardProps {
-  fileName: string;
   nodeName: string;
   details: NodeDetails;
+  describeMap: Record<string, Record<string, string>>;
 }
 
 const getStatusColor = (pct: number) => {
@@ -55,12 +51,28 @@ const getStatusColor = (pct: number) => {
   return "blue";
 };
 
-export function NodesSummaryCard({ fileName, nodeName, details }: NodeCardProps) {
-  // Helper to convert "73%" string to 73 number
-  const parsePct = (val: string) => parseInt(val.replace("%", "")) || 0;
-  const sectionRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-  // Calculate Pod usage percentage
+const getNodeStatusColor = (status: string) => {
+  const s = status.toLowerCase();
+  if (s === "running" || s === "ready" || s === "active" || s === "online") return "var(--green-9)";
+  if (s === "pending" || s === "waiting" || s === "starting") return "var(--orange-9)";
+  if (s === "error" || s === "failed" || s === "crashloopbackoff" || s === "offline") return "var(--red-9)";
+  return "var(--gray-8)";
+};
+
+// ... imports and helper functions (LOGO_MAP, getStatusColor, getNodeStatusColor) remain the same
+
+export function NodesSummaryCard({
+  nodeName,
+  details,
+  describeMap   // Added back
+}: NodeCardProps) {
+  const parsePct = (val: string) => parseInt(val.replace("%", "")) || 0;
+
+  // Logic for status
+  const statusValue = details.status?.STATUS || details.status?.status || "Unknown";
+
+  // Usage percentages
   const podUsage = (parseInt(details.resources.non_terminated_pods) / parseInt(details.allocatable_pods)) * 100;
   const cpuPct = parsePct(details.resources.cpu_requests_pct);
   const memPct = parsePct(details.resources.memory_requests_pct);
@@ -68,137 +80,105 @@ export function NodesSummaryCard({ fileName, nodeName, details }: NodeCardProps)
   const logoFilename = details.os_image_logo.split('/').pop() || "";
   const logoSrc = LOGO_MAP[logoFilename] || defaultLogo;
 
-  const isReady = details.status?.STATUS?.toLowerCase() === "ready";
-
   return (
-    <Card size="2">
-      <Flex gap="4" align="center">
-        {/* 1. Icon & Name */}
-        <Flex gap="3" align="center" style={{ width: "35%" }}>
-          <Tooltip content={details.os_image}>
-            <Box
-              style={{
-                width: '44px',   // Matches the height of two lines of text (Name + IP)
-                height: '44px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'var(--gray-2)', // Light background for logos with transparency
-                borderRadius: '6px',             // Subtle rounding (Radius 2 in Radix)
-                border: '1px solid var(--gray-5)',
-                overflow: 'hidden',
-                flexShrink: 0,                   // Prevents the box from squishing
-              }}
-            >
-              <img
-                src={logoSrc}
-                alt="OS Logo"
+    <Card size="1" style={{ padding: 0, overflow: 'hidden' }}>
+      <Flex align="stretch">
+
+        {/* INDICATOR STRIPE */}
+        <Box
+          style={{
+            width: '6px',
+            backgroundColor: getNodeStatusColor(statusValue),
+            flexShrink: 0
+          }}
+        />
+
+        {/* MAIN DATA ROW */}
+        <Flex gap="4" align="center" style={{ flexGrow: 1 }} py="2" pr="3">
+
+          {/* 1. Icon & Name Section */}
+          <Flex gap="3" align="center" px="3" style={{ width: "30%", minWidth: "220px" }}>
+            <Tooltip content={details.os_image}>
+              <Box
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain', // Important: maintains square ratio without cropping
-                  padding: '4px'        // Prevents the logo from touching the edges
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'var(--gray-2)',
+                  borderRadius: '6px',
+                  border: '1px solid var(--gray-5)',
+                  overflow: 'hidden',
+                  flexShrink: 0,
                 }}
-              />
-            </Box>
-          </Tooltip>
-          <Box>
-            {/* Wrap Name and Badge in a horizontal Flex */}
-            <Flex gap="2" align="center">
-              <Text size="2" weight="bold" style={{ wordBreak: "break-all" }}>
-                {nodeName}
-              </Text>
-            </Flex>
-            {/* IP address stays underneath */}
-            <Text as="div" size="2" color="gray">
-              {details.ip}
-            </Text>
-          </Box>
-        </Flex>
-        <Badge color={isReady ? "green" : "red"} size="1" variant="soft">
-          {details.status?.STATUS ?? "Unknown"}
-        </Badge>
-
-        {/* 2. Divider & Type */}
-        <Flex style={{ width: "10%", borderLeft: "1px solid var(--gray-5)", paddingLeft: "16px" }}>
-          <Text as="div" size="2" weight="bold">
-            {details.workload_class}
-          </Text>
-        </Flex>
-
-        {/* 3. Resources (Pods & CPU) */}
-        <Flex gap="4" style={{ flexGrow: 1 }}>
-          <Box style={{ flex: 1 }}>
-            <Text as="div" size="1" mb="1">
-              Pods {details.resources.non_terminated_pods}/{details.allocatable_pods}
-            </Text>
-            <Progress
-              value={podUsage}
-              size="1"
-              variant="soft"
-              color={getStatusColor(podUsage)}
-              style={{ height: '8px' }}
-            />
-          </Box>
-          <Box style={{ flex: 1 }}>
-            <Text as="div" size="1" mb="1">
-              {details.cpu_capacity} CPU ({details.resources.cpu_requests_pct})
-            </Text>
-            <Progress
-              value={cpuPct}
-              size="1"
-              variant="soft"
-              color={getStatusColor(cpuPct)}
-              style={{ height: '8px' }}
-            />
-          </Box>
-          <Box style={{ flex: 1 }}>
-            <Text as="div" size="1" mb="1">
-              {details.memory_capacity_gi} Memory ({details.resources.memory_requests_pct})
-            </Text>
-            <Progress
-              value={memPct}
-              size="1"
-              variant="soft"
-              color={getStatusColor(memPct)}
-              style={{ height: '8px' }}
-            />
-          </Box>
-        </Flex>
-        {/* 4. Details Button Section */}
-        <Flex align="center" pl="2">
-          <Dialog.Root>
-            <Dialog.Trigger>
-              {/* The trigger button */}
-              <Button variant="outline" size="2" color="gray" style={{ cursor: 'pointer' }}>
-                Describe
-              </Button>
-            </Dialog.Trigger>
-
-            <Dialog.Content style={{ maxWidth: "70vw", width: "95vw" }}>
-              {/* Title for accessibility */}
-              <Dialog.Title hidden>Node Details for {nodeName}</Dialog.Title>
-
-              {/* Wrap your component in a scrollable box so the Modal doesn't grow forever */}
-              <Box id={`scroll-root-${nodeName}`}>
-                <NodeTempDescribeSections
-                  fileName={fileName}
-                  node={nodeName}
+              >
+                <img
+                  src={logoSrc}
+                  alt="OS Logo"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }}
                 />
               </Box>
+            </Tooltip>
+            <Box>
+              <Text size="2" weight="bold" style={{ wordBreak: "break-all", display: 'block' }}>
+                {nodeName}
+              </Text>
+              <Text size="1" color="gray">
+                {details.ip}
+              </Text>
+            </Box>
+          </Flex>
 
-              <Flex gap="3" mt="4" justify="end">
-                <Dialog.Close>
-                  <Button variant="soft" color="gray">
-                    Close
-                  </Button>
-                </Dialog.Close>
-              </Flex>
-            </Dialog.Content>
-          </Dialog.Root>
+          {/* 2. Workload Class */}
+          <Box style={{ width: "12%", borderLeft: "1px solid var(--gray-4)", paddingLeft: "16px" }}>
+            <Text size="1" color="gray" mb="1" style={{ display: 'block', fontSize: '10px' }}>CLASS</Text>
+            <Text size="2" weight="bold">{details.workload_class}</Text>
+          </Box>
+
+          {/* 3. Resources (Progress Bars) */}
+          <Flex gap="4" style={{ flexGrow: 1, borderLeft: "1px solid var(--gray-4)", paddingLeft: "16px" }}>
+            <Box style={{ flex: 1 }}>
+              <Text as="div" size="1" mb="1" color="gray">Pods {details.resources.non_terminated_pods}/{details.allocatable_pods}</Text>
+              <Progress value={podUsage} size="1" color={getStatusColor(podUsage)} style={{ height: '6px' }} />
+            </Box>
+            <Box style={{ flex: 1 }}>
+              <Text as="div" size="1" mb="1" color="gray">{details.cpu_capacity} CPU ({cpuPct}%)</Text>
+              <Progress value={cpuPct} size="1" color={getStatusColor(cpuPct)} style={{ height: '6px' }} />
+            </Box>
+            <Box style={{ flex: 1 }}>
+              <Text as="div" size="1" mb="1" color="gray">{details.memory_capacity_gi} Mem ({memPct}%)</Text>
+              <Progress value={memPct} size="1" color={getStatusColor(memPct)} style={{ height: '6px' }} />
+            </Box>
+          </Flex>
+
+          {/* 4. Action Button */}
+          <Flex align="center" pl="3" style={{ borderLeft: "1px solid var(--gray-4)" }}>
+            <Dialog.Root>
+              <Dialog.Trigger>
+                <Button variant="ghost" size="1" color="gray" style={{ cursor: 'pointer' }}>
+                  Describe
+                </Button>
+              </Dialog.Trigger>
+
+              <Dialog.Content style={{ maxWidth: "70vw", width: "95vw" }}>
+                <Dialog.Title size="3">Nodes</Dialog.Title>
+                <Box id={`scroll-root-${nodeName}`}>
+                  <NodeTempDescribeSections
+                    nodeName={nodeName}           // Ensure this prop name matches NodeDescribeSections
+                    describeMap={describeMap}
+                  />
+                </Box>
+                <Flex gap="3" mt="4" justify="end">
+                  <Dialog.Close>
+                    <Button variant="soft" color="gray">Close</Button>
+                  </Dialog.Close>
+                </Flex>
+              </Dialog.Content>
+            </Dialog.Root>
+          </Flex>
         </Flex>
       </Flex>
     </Card>
   );
 }
-

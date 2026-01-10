@@ -1,55 +1,26 @@
-// src/components/components/ComponentDescribeSections.tsx
+// src/components/components/ComponentDescribe.tsx
 
 import { Card, Flex, Heading, Text, Spinner, Select, Box } from "@radix-ui/themes";
 import { useEffect, useRef, useState } from "react";
-import { fetchComponentDescribeSections, fetchComponentDescribe } from "../../api/component";
 
 type Props = {
     fileName: string;
     component: string;
     componentName: string;
-    describeMap: Record<string, any>
-    describeHeaderMap: Record<string, any>
+    describeMap: Record<string, Record<string, string>>; // Updated type for nested object
 };
 
-// Define a unified interface to keep headers and content in sync
 interface ParsedSection {
     title: string;
     content: string;
 }
 
-export default function ComponentDescribeSections({ fileName, component, componentName, describeMap, describeHeaderMap }: Props) {
+export default function ComponentDescribeSections({ componentName, describeMap }: Props) {
     const [sections, setSections] = useState<ParsedSection[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    // FIX ts(7015): Define the ref with an index signature for dynamic access
     const sectionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
-
-    /**
-     * Parses the raw describe text into objects containing the found header and the text body.
-     */
-    const parseDescribeOutput = (text: string, headers: string[]): ParsedSection[] => {
-        if (!text) return [];
-        if (headers.length === 0) return [{ title: "Output", content: text }];
-
-        // Escape headers for Regex safety (handles dots/special chars in K8s keys)
-        const escaped = headers.map(h => h.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-        const pattern = new RegExp(`^(${escaped.join('|')})\\b:?`, 'gm');
-        const matches = [...text.matchAll(pattern)];
-
-        if (matches.length === 0) return [{ title: "Output", content: text }];
-
-        return matches.map((match, i) => {
-            const start = match.index!;
-            const end = matches[i + 1] ? matches[i + 1].index! : text.length;
-
-            return {
-                title: match[1], // Capture the actual header found in the text
-                content: text.slice(start, end).trim()
-            };
-        });
-    };
 
     useEffect(() => {
         let isMounted = true;
@@ -57,24 +28,32 @@ export default function ComponentDescribeSections({ fileName, component, compone
         setError(null);
 
         try {
-            const rawText = describeMap?.[componentName];
-            const headers = describeHeaderMap?.[componentName];
+            // Access the specific resource's data (e.g., describeMap["my-pod"])
+            const resourceData = describeMap?.[componentName];
 
-            if (!rawText) {
-                // If data isn't ready yet, we just wait (don't throw error immediately)
-                if (isMounted) setLoading(false);
+            if (!resourceData) {
+                if (isMounted) {
+                    setSections([]);
+                    setLoading(false);
+                }
                 return;
             }
+            console.log(resourceData)
 
-            // Parse data
-            const parsedData = parseDescribeOutput(rawText, headers || []);
+            // Transform {"Section Name": "Content"} into [{title: "...", content: "..."}]
+            const parsedData: ParsedSection[] = Object.entries(resourceData).map(
+                ([title, content]) => ({
+                    title,
+                    content,
+                })
+            );
 
             if (isMounted) {
                 setSections(parsedData);
             }
         } catch (err) {
             if (isMounted) {
-                console.error("Parsing error:", err);
+                console.error("Data processing error:", err);
                 setError(`Unable to load details for ${componentName}`);
             }
         } finally {
@@ -84,13 +63,11 @@ export default function ComponentDescribeSections({ fileName, component, compone
         }
 
         return () => { isMounted = false; };
-    }, [fileName, component, componentName, describeMap, describeHeaderMap]);
-    // Added maps to dependencies so it re-runs when data arrives
+    }, [componentName, describeMap]); // Removed fileName/component as they aren't used here
 
     function scrollToSection(index: number) {
         const el = sectionRefs.current[index];
         if (el) {
-            // Using "smooth" for better UX, or "instant" per your original code
             el.scrollIntoView({ behavior: "instant", block: "start" });
         }
     }
@@ -120,7 +97,6 @@ export default function ComponentDescribeSections({ fileName, component, compone
                 overflow: 'hidden'
             }}
         >
-            {/* FIXED NAV HEADER */}
             <Flex
                 justify="between"
                 align="center"
@@ -136,7 +112,6 @@ export default function ComponentDescribeSections({ fileName, component, compone
                 <Select.Root onValueChange={(v) => scrollToSection(Number(v))}>
                     <Select.Trigger placeholder="Jump to section" variant="soft" color="gray" />
                     <Select.Content position="popper">
-                        {/* Now strictly mapping to headers actually found in the content */}
                         {sections.map((section, idx) => (
                             <Select.Item key={idx} value={String(idx)}>
                                 {section.title}
@@ -146,29 +121,29 @@ export default function ComponentDescribeSections({ fileName, component, compone
                 </Select.Root>
             </Flex>
 
-            {/* SCROLLABLE CONTENT */}
             <Box p="3" style={{ overflowY: "auto", flex: 1, backgroundColor: 'var(--gray-2)' }}>
                 <Flex direction="column" gap="3">
                     {sections.map((section, idx) => (
                         <div
                             key={idx}
-                            // FIXED: Ref callback wrapped in braces to return void (Fixes ts(2322))
                             ref={(el) => { sectionRefs.current[idx] = el; }}
                             style={{ scrollMarginTop: "10px" }}
                         >
+                            {/* Visual Header for the Section inside the scroll area */}
+                            <Text size="2" weight="bold" mb="1" color="gray" style={{ display: 'block' }}>
+                                {section.title}
+                            </Text>
                             <Card variant="surface" style={{ padding: "0", overflow: 'hidden' }}>
                                 <pre
                                     style={{
                                         margin: 0,
                                         padding: "11px",
                                         fontSize: "13px",
-                                        fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace',
+                                        fontFamily: 'Menlo, Monaco, Consolas, monospace',
                                         lineHeight: "1.6",
                                         whiteSpace: "pre-wrap",
                                         wordBreak: "break-word",
                                         color: "var(--gray-12)",
-                                        borderRadius: "var(--radius-2)",
-                                        letterSpacing: "-0.01em",
                                     }}
                                 >
                                     {section.content}

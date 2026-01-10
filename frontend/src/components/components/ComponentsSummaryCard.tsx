@@ -12,8 +12,12 @@ interface ComponentsCardProps {
   componentName: string; // The specific resource name (e.g., pod name, node name)
   details: ComponentsDetails;
   visibleColumns: string[]; // Added this to receive user-selected columns
-  describeMap: Record<string, any>
-  describeHeaderMap: Record<string, any>
+  describeMap: Record<string, Record<string, string>>;
+}
+
+function capitalize(str: string) {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 export function ComponentsSummaryCard({
@@ -23,7 +27,6 @@ export function ComponentsSummaryCard({
   details,
   visibleColumns,
   describeMap,
-  describeHeaderMap
 }: ComponentsCardProps) {
 
   // 1. Status Logic for the side stripe
@@ -99,14 +102,13 @@ export function ComponentsSummaryCard({
               </Dialog.Trigger>
 
               <Dialog.Content style={{ maxWidth: "70vw", width: "95vw" }}>
-                <Dialog.Title size="3">{component} Describe</Dialog.Title>
+                <Dialog.Title size="3">{capitalize(component)}</Dialog.Title>
                 <Box id={`scroll-root-${componentName}`}>
                   <ComponentDescribeSections
                     fileName={fileName}
                     component={component}
                     componentName={componentName}
                     describeMap={describeMap}
-                    describeHeaderMap={describeHeaderMap}
                   />
                 </Box>
 
