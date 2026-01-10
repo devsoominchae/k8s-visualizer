@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=False)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     yield
 
@@ -25,12 +25,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# For prod
 app.include_router(node.router)
 app.include_router(env.router)
 app.include_router(pod.router)
 app.include_router(pvc.router)
 app.include_router(resources.router)
 app.include_router(file_manager.router)
+
+# # For test
+# app.include_router(node.router, prefix="/api")
+# app.include_router(env.router, prefix="/api")
+# app.include_router(pod.router, prefix="/api")
+# app.include_router(pvc.router, prefix="/api")
+# app.include_router(resources.router, prefix="/api")
+# app.include_router(file_manager.router)
 
 # To test, run uvicorn main:app --reload --port 5000
 # Read /etc/supervisord.d/k8s_visualizer_app.ini for details of monitoring
