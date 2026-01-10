@@ -41,60 +41,59 @@ class NodeInfo(Resource):
         self.get_resource_names()
     
     def get_node_status(self):
-        with TarController(self.file_name) as ctrl:
-            nodes_json = ""
-            
-            if ctrl.file_exists_in_tar(self.json_nodes_path):
-                json_nodes_text = ctrl.get_file_content(self.json_nodes_path)
-                nodes_json = json.loads(json_nodes_text)
-            else:
-                node_yaml_text = ctrl.get_file_content(self.yaml_nodes_path)
-                nodes_json = yaml.safe_load(node_yaml_text)
-            
-            describe_nodes_text = ctrl.get_file_content(self.describe_resource_path)
-            resources_dict = self.parse_describe_text(describe_nodes_text)
-            
-            get_node_output = self.get_resource_status()
+        nodes_json = ""
+        
+        if self.ctrl.file_exists_in_tar(self.json_nodes_path):
+            json_nodes_text = self.ctrl.get_file_content(self.json_nodes_path)
+            nodes_json = json.loads(json_nodes_text)
+        else:
+            node_yaml_text = self.ctrl.get_file_content(self.yaml_nodes_path)
+            nodes_json = yaml.safe_load(node_yaml_text)
+        
+        describe_nodes_text = self.ctrl.get_file_content(self.describe_resource_path)
+        resources_dict = self.parse_describe_text(describe_nodes_text)
+        
+        get_node_output = self.get_resource_status()
 
-            node_status = {}
-            for i in range(len(deep_get(nodes_json, ["items"], []))):
-                name = deep_get(nodes_json, ["items", i, "metadata", "name"], "Node name unavailable")
-                # annotations = deep_get(nodes_json, ["items", i, "metadata", "annotations"], "Node annotation unavailable")
-                labels = deep_get(nodes_json, ["items", i, "metadata", "labels"], {})
-                # taints = deep_get(nodes_json, ["items", i, "spec", "taints"], "Node taints unavailable")
-                ip = deep_get(nodes_json, ["items", i, "status", "addresses", 0, "address"], "Node ip unavailable")
-                workload_class = deep_get(labels, ["workload.sas.com/class"], "N/A")
-                allocatable_pods = deep_get(nodes_json, ["items", i, "status", "allocatable", "pods"], "Allocatable pods unavailable")
-                cpu_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "cpu"], "Allocatable node CPU unavailable")
-                cpu_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "cpu"], "Node CPU capacity unavailable")
-                memory_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "memory"], "Allocatable node memory unavailable")
-                memory_allocatable_gi = int(int(re.findall(r'\d+', memory_allocatable)[0]) / (1024 ** 2))
-                memory_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "memory"], "Node memory capacity unavailable")
-                memory_capacity_gi = int(int(re.findall(r'\d+', memory_capacity)[0]) / (1024 ** 2))
-                resources = deep_get(resources_dict, [name], DEAFULT_RESOURCES)
-                status = get_node_output[name]
-                
-                
-                os_image_logo = "/home/admin/k8s-visualizer/frontend/src/assets/default.png"
-                os_image = deep_get(nodes_json, ["items", i, "status", "nodeInfo", "osImage"], "Node OS image unavailable")
-                for image_name in OS_LOGO_DICT.keys():
-                    if image_name in os_image:
-                        os_image_logo = OS_LOGO_DICT[image_name]
+        node_status = {}
+        for i in range(len(deep_get(nodes_json, ["items"], []))):
+            name = deep_get(nodes_json, ["items", i, "metadata", "name"], "Node name unavailable")
+            # annotations = deep_get(nodes_json, ["items", i, "metadata", "annotations"], "Node annotation unavailable")
+            labels = deep_get(nodes_json, ["items", i, "metadata", "labels"], {})
+            # taints = deep_get(nodes_json, ["items", i, "spec", "taints"], "Node taints unavailable")
+            ip = deep_get(nodes_json, ["items", i, "status", "addresses", 0, "address"], "Node ip unavailable")
+            workload_class = deep_get(labels, ["workload.sas.com/class"], "N/A")
+            allocatable_pods = deep_get(nodes_json, ["items", i, "status", "allocatable", "pods"], "Allocatable pods unavailable")
+            cpu_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "cpu"], "Allocatable node CPU unavailable")
+            cpu_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "cpu"], "Node CPU capacity unavailable")
+            memory_allocatable = deep_get(nodes_json, ["items", i, "status", "allocatable", "memory"], "Allocatable node memory unavailable")
+            memory_allocatable_gi = int(int(re.findall(r'\d+', memory_allocatable)[0]) / (1024 ** 2))
+            memory_capacity = deep_get(nodes_json, ["items", i, "status", "capacity", "memory"], "Node memory capacity unavailable")
+            memory_capacity_gi = int(int(re.findall(r'\d+', memory_capacity)[0]) / (1024 ** 2))
+            resources = deep_get(resources_dict, [name], DEAFULT_RESOURCES)
+            status = get_node_output[name]
+            
+            
+            os_image_logo = "/home/admin/k8s-visualizer/frontend/src/assets/default.png"
+            os_image = deep_get(nodes_json, ["items", i, "status", "nodeInfo", "osImage"], "Node OS image unavailable")
+            for image_name in OS_LOGO_DICT.keys():
+                if image_name in os_image:
+                    os_image_logo = OS_LOGO_DICT[image_name]
 
-                node_status[name] = {}
-                node_status[name]["ip"] = ip
-                node_status[name]["workload_class"] = workload_class
-                node_status[name]["allocatable_pods"] = allocatable_pods
-                node_status[name]["cpu_allocatable"] = cpu_allocatable
-                node_status[name]["cpu_capacity"] = cpu_capacity
-                node_status[name]["memory_allocatable"] = memory_allocatable
-                node_status[name]["memory_allocatable_gi"] = f"{memory_allocatable_gi} Gi"
-                node_status[name]["memory_capacity"] = memory_capacity
-                node_status[name]["memory_capacity_gi"] = f"{memory_capacity_gi} Gi"
-                node_status[name]["os_image"] = os_image
-                node_status[name]["os_image_logo"] = os_image_logo
-                node_status[name]["resources"] = resources
-                node_status[name]["status"] = status
+            node_status[name] = {}
+            node_status[name]["ip"] = ip
+            node_status[name]["workload_class"] = workload_class
+            node_status[name]["allocatable_pods"] = allocatable_pods
+            node_status[name]["cpu_allocatable"] = cpu_allocatable
+            node_status[name]["cpu_capacity"] = cpu_capacity
+            node_status[name]["memory_allocatable"] = memory_allocatable
+            node_status[name]["memory_allocatable_gi"] = f"{memory_allocatable_gi} Gi"
+            node_status[name]["memory_capacity"] = memory_capacity
+            node_status[name]["memory_capacity_gi"] = f"{memory_capacity_gi} Gi"
+            node_status[name]["os_image"] = os_image
+            node_status[name]["os_image_logo"] = os_image_logo
+            node_status[name]["resources"] = resources
+            node_status[name]["status"] = status
         
         return node_status
     

@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi_cache.decorator import cache
 
 router = APIRouter(
-    prefix="/api/env",
+    prefix="/env",
     tags=["Environment Information"]
 )
 

@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi_cache.decorator import cache
 
 router = APIRouter(
-    prefix="/api/node",
+    prefix="/node",
     tags=["Node Information"]
 )
 

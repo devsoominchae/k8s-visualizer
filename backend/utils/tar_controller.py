@@ -6,7 +6,7 @@ import tarfile
 class TarController:
     def __init__(self, tgz_path):
         self.tgz_path = tgz_path
-        self.tar = None
+        self.tar = tarfile.open(self.tgz_path, "r:*")
 
     def __enter__(self):
         """Allows use of 'with TarController(...) as ctrl:'"""
@@ -18,10 +18,8 @@ class TarController:
             self.tar.close()
     
     def file_exists_in_tar(self, file_to_find):
-        with tarfile.open(self.tgz_path, "r:*") as tar:
-            # getnames() returns a list of all member names
-            if file_to_find in tar.getnames():
-                return True
+        if file_to_find in self.tar.getnames():
+            return True
         return False
 
     def list_files_in_dir(self, folder_path=""):

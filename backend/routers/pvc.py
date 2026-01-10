@@ -6,7 +6,7 @@ from resources.pvc import PVCInfo
 
 
 router = APIRouter(
-    prefix="/api/pvc",
+    prefix="/pvc",
     tags=["PersistentVolumeClaims Information"]
 )
     

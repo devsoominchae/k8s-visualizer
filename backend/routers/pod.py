@@ -8,7 +8,7 @@ from utils.conf import CACHE_TIMEOUT
 from utils.log_controller import LogController
 
 router = APIRouter(
-    prefix="/api/pod",
+    prefix="/pod",
     tags=["Pod Information"]
 )
 

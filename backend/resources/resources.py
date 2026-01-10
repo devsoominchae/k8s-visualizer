@@ -27,6 +27,7 @@ K8S_ABBREVIATIONS = {
 class Resource:
     def __init__(self, file_name, resource_name=""):
         self.file_name = file_name
+        self.ctrl = TarController(self.file_name)
         
         self.env_info = EnvInfo(file_name)
         self.env_info_dict = self.env_info.get_env_info_dict()
@@ -47,50 +48,44 @@ class Resource:
             self.names = self.get_resource_names()
     
     def get_available_resource_types(self):
-        with TarController(self.file_name) as ctrl:
-            available_resource_paths = ctrl.list_files_in_dir(self.get_folder_path)
-            self.available_resource_types = [os.path.basename(os.path.splitext(i)[0]) for i in available_resource_paths]
+        available_resource_paths = self.ctrl.list_files_in_dir(self.get_folder_path)
+        self.available_resource_types = [os.path.basename(os.path.splitext(i)[0]) for i in available_resource_paths]
             
         return self.available_resource_types
     
     def get_resource_names(self):
-        with TarController(self.file_name) as ctrl:
-            get_resource_text = ctrl.get_file_content(self.get_resource_path)
-            self.names = self.get_names_from_get_output(get_resource_text)
+        get_resource_text = self.ctrl.get_file_content(self.get_resource_path)
+        self.names = self.get_names_from_get_output(get_resource_text)
 
         return self.names
     
     def get_resource_status(self):
-        with TarController(self.file_name) as ctrl:
-            get_resource_text = ctrl.get_file_content(self.get_resource_path)
-            
-            get_resource = self.parse_get_output(get_resource_text)
+        get_resource_text = self.ctrl.get_file_content(self.get_resource_path)            
+        get_resource = self.parse_get_output(get_resource_text)
             
         return get_resource
-    
+
     def get_resource_describe(self):
-        with TarController(self.file_name) as ctrl:
-            describe_resource_text = ctrl.get_file_content(self.describe_resource_path)
-            
-            describe = self.parse_describe_output(describe_resource_text)
-            
-            describe_resource_dict = dict(zip(self.names, describe))
-            
-        return describe_resource_dict
+        describe_resource_text = self.ctrl.get_file_content(self.describe_resource_path)
+        
+        describe = self.parse_describe_output(describe_resource_text)
+        
+        describe_sections = []
+        for each_describe in describe:
+            describe_by_section = {}
+            for line in each_describe.split('\n'):
+                if not line.startswith(' ') and line:
+                    section_name = line.split(':')[0]
+                if section_name not in describe_by_section.keys():
+                    describe_by_section[section_name] = line
+                else:
+                    describe_by_section[section_name] = "\n".join((describe_by_section[section_name], line))
+            describe_sections.append(describe_by_section)
 
-    def get_resource_describe_section(self):
-         with TarController(self.file_name) as ctrl:
-            describe_resource_text = ctrl.get_file_content(self.describe_resource_path)
-            
-            describe = self.parse_describe_output(describe_resource_text)
-            
-            describe_sections = []
-            for each_describe in describe:
-                describe_sections.append([i.split(':')[0] for i in each_describe.split('\n') if not i.startswith(' ') and i])
+        describe_section_dict = dict(zip(self.names, describe_sections))
+        
+        return describe_section_dict
 
-            describe_section_dict = dict(zip(self.names, describe_sections))
-            
-            return describe_section_dict
     
     def parse_get_output(self, get_text):
         get_output = {}

@@ -6,7 +6,7 @@ from resources.resources import Resource
 
 
 router = APIRouter(
-    prefix="/api/resource",
+    prefix="/resource",
     tags=["K8s Resource Information"]
 )
 
