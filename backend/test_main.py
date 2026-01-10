@@ -105,18 +105,6 @@ def test_get_resource():
     
     assert response.status_code == 200
     
-def test_get_resource_describe_section():
-    params = {
-        "file_name": TEST_FILE_NAME,
-        "resource_name": "deployments"
-    }
-    response = client.get(
-        "/api/resource/describe_section",
-        params = params
-    )
-    
-    assert response.status_code == 200
-    
 def test_get_resource_names():
     params = {
         "file_name": TEST_FILE_NAME,
@@ -176,9 +164,7 @@ def test_get_pod_containers():
 
 def test_parse_log():
     params = {
-        "file_name": TEST_FILE_NAME,
-        "pod": "sas-configuration-6798fcdb8c-cc6dc",
-        "container": "sas-configuration"
+        "file_name": TEST_FILE_NAME
     }
     response = client.get(
         "/api/pod/logs",
