@@ -1,3 +1,5 @@
+// src/components/DashboardLayout.tsx
+
 import { Flex, Box } from "@radix-ui/themes";
 import { useState, useEffect } from "react";
 import Sidebar, { Screen } from "./Sidebar";
@@ -5,6 +7,7 @@ import Topbar from "./Topbar";
 import Dashboard from "./Dashboard";
 import NodesPage from "./nodes/NodesPage";
 import ComponentsPage from "./components/ComponentsPage";
+import PodsPage from "./pods/PodsPage";
 
 type Props = {
   fileName: string;
@@ -30,11 +33,11 @@ export default function DashboardLayout({ fileName, component }: Props) {
       case "details":
         return <Dashboard fileName={fileName} />;
 
-      case "nodes_temp":
+      case "nodes":
         return <NodesPage fileName={fileName} />;
 
       case "pods":
-        return <ComponentsPage fileName={fileName} component="pods" />;
+        return <PodsPage fileName={fileName} component="pods" />;
 
       case "deployments":
         return <ComponentsPage fileName={fileName} component="deployments" />;
@@ -86,10 +89,12 @@ export default function DashboardLayout({ fileName, component }: Props) {
     }
   }
 
+  const baseName = fileName.split('/').pop();
+
   return (
     <Flex direction="column" height="100vh">
       {/* Top bar */}
-      <Topbar title="k8s-visualizer" />
+      <Topbar title={`K8s Visualizer - ${baseName}`} />
 
       {/* Main layout */}
       <Flex flexGrow="1" overflow="hidden">
